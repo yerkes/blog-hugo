@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PHP on 余不二五</title>
+    <link>http://buera.top/blog/categories/php/</link>
+    <description>Recent content in PHP on 余不二五</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 15 Sep 2020 17:23:55 +0800</lastBuildDate><atom:link href="http://buera.top/blog/categories/php/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>七牛云内容审核API之PHP服务端请求代码</title>
+      <link>http://buera.top/blog/posts/%E4%B8%83%E7%89%9B%E4%BA%91%E5%86%85%E5%AE%B9%E5%AE%A1%E6%A0%B8api%E4%B9%8Bphp%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AF%B7%E6%B1%82%E4%BB%A3%E7%A0%81/</link>
+      <pubDate>Tue, 15 Sep 2020 17:23:55 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/%E4%B8%83%E7%89%9B%E4%BA%91%E5%86%85%E5%AE%B9%E5%AE%A1%E6%A0%B8api%E4%B9%8Bphp%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AF%B7%E6%B1%82%E4%BB%A3%E7%A0%81/</guid>
+      <description> 调用七牛云图片审核接口
+ &amp;lt;?php namespace app\api\controller; use \Qiniu\Auth; use Qiniu\Http\Client; class Test { public function index(){ // 用于签名的公钥和私钥  $accessKey = &amp;#34;&amp;#34;; $secretKey = &amp;#34;&amp;#34;; $auth = new Auth($accessKey, $secretKey); $uri = &amp;#39;https://i.loli.net/2020/09/28/VtIqovsR649Zmdh.jpg&amp;#39;; $url = &amp;#34;http://ai.qiniuapi.com/v3/image/censor&amp;#34;; $method = &amp;#34;POST&amp;#34;; $host = &amp;#34;ai.qiniuapi.com&amp;#34;; $body = &amp;#34;{ \&amp;#34;data\&amp;#34;: { \&amp;#34;uri\&amp;#34;: \&amp;#34;$uri\&amp;#34; } ,\&amp;#34;params\&amp;#34;: {\&amp;#34;scenes\&amp;#34;: [\&amp;#34;pulp\&amp;#34;,\&amp;#34;terror\&amp;#34;,\&amp;#34;politician\&amp;#34;]}}&amp;#34;; $contentType = &amp;#34;application/json&amp;#34;; $headers = $auth-&amp;gt;authorizationV2($url, $method, $body, $contentType); $headers[&amp;#39;Content-Type&amp;#39;] = $contentType; $headers[&amp;#39;Host&amp;#39;] = $host; $response = Client::post($url, $body, $headers); if ($response-&amp;gt;ok()) { $r = $response-&amp;gt;json(); return json($r); } } } </description>
+    </item>
+    
+  </channel>
+</rss>

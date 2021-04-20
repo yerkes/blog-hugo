@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>js函数 on 余不二五</title>
+    <link>http://buera.top/blog/tags/js%E5%87%BD%E6%95%B0/</link>
+    <description>Recent content in js函数 on 余不二五</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 01 Jun 2020 19:39:44 +0800</lastBuildDate><atom:link href="http://buera.top/blog/tags/js%E5%87%BD%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Javascript中的slice、splice、split使用区别</title>
+      <link>http://buera.top/blog/posts/javascript%E4%B8%AD%E7%9A%84slicesplicesplit%E4%BD%BF%E7%94%A8%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Mon, 01 Jun 2020 19:39:44 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/javascript%E4%B8%AD%E7%9A%84slicesplicesplit%E4%BD%BF%E7%94%A8%E5%8C%BA%E5%88%AB/</guid>
+      <description>1、slice（数组）
+用法：array.slice(start,end)
+解释：该方法是对数组进行部分截取，并返回一个数组副本；参数start是截取的开始数组索引，end参数等于你要取的最后一个字符的位置值加上1（可选）
+//如果不传入参数二，那么将从参数一的索引位置开始截取，一直到数组尾 var a=[1,2,3,4,5,6]; var b=a.slice(0,3); //[1,2,3] var c=a.slice(3); //[4,5,6]  //如果两个参数中的任何一个是负数，array.length会和它们相加，试图让它们成为非负数，举例说明： //当只传入一个参数，且是负数时，length会与参数相加，然后再截取 var a=[1,2,3,4,5,6]; var b=a.slice(-1); //[6]  //当只传入一个参数，是负数时,并且参数的绝对值大于数组length时，会截取整个数组 var a=[1,2,3,4,5,6]; var b=a.slice(-6); //[1,2,3,4,5,6] var c=a.slice(-8); //[1,2,3,4,5,6]  //当传入两个参数一正一负时，length也会先于负数相加后，再截取 var a=[1,2,3,4,5,6]; var b=a.slice(2,-3); //[3]  //当传入一个参数，大于length时，将返回一个空数组 var a=[1,2,3,4,5,6]; var b=a.slice(6);　//[] 2、slice（字符串）
+用法：string.slice(start,end)
+解释：slice方法复制string的一部分来构造一个新的字符串，用法与参数匀和数组的slice方法一样;end参数等于你要取的最后一个字符的位置值加上1
+//举个简单的例子 var a=&amp;#34;i am a boy&amp;#34;; var b=a.slice(0,6); //&amp;#34;i am a&amp;#34; 3、splice（数组）
+用法：array.splice(start,deleteCount,item&amp;hellip;)
+解释：splice方法从array中移除一个或多个数组，并用新的item替换它们。参数start是从数组array中移除元素的开始位置。参数deleteCount是要移除的元素的个数。
+如果有额外的参数，那么item会插入到被移除元素的位置上。它返回一个包含被移除元素的数组。
+//举一个简单的例子 var a=[&amp;#39;a&amp;#39;,&amp;#39;b&amp;#39;,&amp;#39;c&amp;#39;]; var b=a.splice(1,1,&amp;#39;e&amp;#39;,&amp;#39;f&amp;#39;); //a=[&amp;#39;a&amp;#39;,&amp;#39;e&amp;#39;,&amp;#39;f&amp;#39;,&amp;#39;c&amp;#39;],b=[&amp;#39;b&amp;#39;] 4、split（字符串）
+用法：string.split(separator,limit)</description>
+    </item>
+    
+  </channel>
+</rss>

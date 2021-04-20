@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Thinkphp on 余不二五</title>
+    <link>http://buera.top/blog/tags/thinkphp/</link>
+    <description>Recent content in Thinkphp on 余不二五</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 04 Feb 2021 20:16:13 +0800</lastBuildDate><atom:link href="http://buera.top/blog/tags/thinkphp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Thinkphp Restful API同一个字段多个值查询</title>
+      <link>http://buera.top/blog/posts/thinkphp-restful-api%E5%90%8C%E4%B8%80%E4%B8%AA%E5%AD%97%E6%AE%B5%E5%A4%9A%E4%B8%AA%E5%80%BC%E6%9F%A5%E8%AF%A2/</link>
+      <pubDate>Thu, 04 Feb 2021 20:16:13 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/thinkphp-restful-api%E5%90%8C%E4%B8%80%E4%B8%AA%E5%AD%97%E6%AE%B5%E5%A4%9A%E4%B8%AA%E5%80%BC%E6%9F%A5%E8%AF%A2/</guid>
+      <description>$where[] = [&amp;#39;level&amp;#39;, &amp;#39;=&amp;#39;, 1]; $where[] = [&amp;#39;level&amp;#39;, &amp;#39;=&amp;#39;, 2]; $user = UserModel::whereOr($where)-&amp;gt;select(); where与whereOr混写（条件1 and (条件2 or 条件3)）  遇到whereOr和where组合链式操作使用闭包条件统一写到闭包里面 会自动加上括号. 改写链式查询条件为以下:
+ $where[] = [&amp;#39;level&amp;#39;, &amp;#39;=&amp;#39;, 1]; $where[] = [&amp;#39;level&amp;#39;, &amp;#39;=&amp;#39;, 2]; $user = UserModel::where(&amp;#39;条件1&amp;#39;)-&amp;gt;where(function ($query) use ($where) { $query-&amp;gt;where(&amp;#39;条件2&amp;#39;)-&amp;gt;whereOr($where) })-&amp;gt;select(); 查询时间范围 $rangeData[&amp;#39;sell_date&amp;#39;] = [&amp;#39;egt&amp;#39;=&amp;gt;$date_start_day,&amp;#39;elt&amp;#39;=&amp;gt;$date_end_day];  一个字段多个值查询
+ $where[] = [&amp;#39;level&amp;#39;, &amp;#39;=&amp;#39;, 1]; $where[] = [&amp;#39;level&amp;#39;, &amp;#39;=&amp;#39;, 2]; 或 $whereOr[] = [&amp;#39;shop_name&amp;#39;,&amp;#39;in&amp;#39;,$shops]; </description>
+    </item>
+    
+  </channel>
+</rss>

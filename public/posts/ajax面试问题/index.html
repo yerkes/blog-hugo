@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="author" content="余不二五">
+		<meta name="description" content="工欲善其事必先利其器">
+		<meta name="generator" content="Hugo 0.76.5" />
+		<title>AJAX面试问题 &middot; 余不二五</title>
+		<link rel="shortcut icon" href="http://buera.top/blog/images/favicon.ico">
+		<link rel="stylesheet" href="http://buera.top/blog/css/style.css">
+		<link rel="stylesheet" href="http://buera.top/blog/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="http://buera.top/blog/css/font-awesome.min.css">
+		
+
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://buera.top/blog/'> <span class="arrow">←</span>首页</a>
+	
+	<a href='http://buera.top/blog/posts'>归档</a>
+	<a href='http://buera.top/blog/tags'>标签</a>
+	<a href='http://buera.top/blog/about'>关于</a>
+
+	
+
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        AJAX面试问题
+                    </h1>
+                    <h2 class="headline">
+                    Oct 15, 2020 19:57
+                    · 233 words
+                    · 2 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://buera.top/blog/tags/ajax">AJAX</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>下面列出了常见的AJAX面试问题和答案。</p>
+<h3 id="1什么是ajax">1、什么是AJAX？</h3>
+<p>AJAX代表异步JavaScript和XML。它是一组用于异步显示数据的相关技术。换句话说，它在不重新加载网页的情况下发送和检索数据。</p>
+<h3 id="2ajax有哪些优点">2、AJAX有哪些优点？</h3>
+<ol>
+<li>快速回复</li>
+<li>带宽利用率</li>
+<li>在从服务器检索数据之前，不会阻止用户。</li>
+<li>它允许我们只将重要数据发送到服务器。</li>
+<li>它使应用程序具有交互性和更快速。</li>
+</ol>
+<h3 id="3ajax有哪些缺点">3、AJAX有哪些缺点？</h3>
+<p>​	（1） 取决于JavaScript</p>
+<p>​	（2）安全问题</p>
+<p>​	（3）调试很困难</p>
+<h3 id="4原生js-ajax请求有几个步骤分别是什么">4、原生js ajax请求有几个步骤？分别是什么</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">//创建 XMLHttpRequest 对象
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ajax</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>();
+
+<span style="color:#75715e">//规定请求的类型、URL 以及是否异步处理请求。
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">ajax</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#39;GET&#39;</span>,<span style="color:#a6e22e">url</span>,<span style="color:#66d9ef">true</span>);
+
+<span style="color:#75715e">//发送信息至服务器时内容编码类型
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">ajax</span>.<span style="color:#a6e22e">setRequestHeader</span>(<span style="color:#e6db74">&#34;Content-type&#34;</span>, <span style="color:#e6db74">&#34;application/x-www-form-urlencoded&#34;</span>); 
+
+<span style="color:#75715e">//发送请求
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">ajax</span>.<span style="color:#a6e22e">send</span>(<span style="color:#66d9ef">null</span>);  
+
+<span style="color:#75715e">//接受服务器响应数据
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">ajax</span>.<span style="color:#a6e22e">onreadystatechange</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {
+	<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">readyState</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">304</span>)) {
+	}
+};
+</code></pre></div><h3 id="5ajax几种请求方式他们的优缺点">5、ajax几种请求方式？他们的优缺点？</h3>
+<p>常用的post,get,delete。不常用copy、head、link等等。</p>
+<p>区别：</p>
+<p>（1）post比get安全 (因为post参数在请求体中。get参数在url上面)</p>
+<p>（2）get传输速度比post快 根据传参决定的。(post通过请求体传参，后台通过数据流接收。速度稍微慢一些。而get通过url传参可以直接获取)</p>
+<p>（3）post传输文件大理论没有限制  get传输文件小大概7-8k ie4k左右</p>
+<p>（4）get获取数据 post上传数据(上传的数据比较多  而且上传数据都是重要数据。所以不论在安全性还是数据量级 post是最好的选择)</p>
+<h3 id="6目前市场上运行的ajax的真实web应用程序是什么">6、目前市场上运行的AJAX的真实Web应用程序是什么？</h3>
+<ul>
+<li>
+<p>推特</p>
+</li>
+<li>
+<p>Facebook</p>
+</li>
+<li>
+<p>Gmail</p>
+</li>
+<li>
+<p>Javatpoint</p>
+</li>
+<li>
+<p>Youtube</p>
+</li>
+</ul>
+<h3 id="7ajax有哪些安全问题">7、AJAX有哪些安全问题？</h3>
+<ul>
+<li>
+<p>AJAX源代码是可读的</p>
+</li>
+<li>
+<p>攻击者可以将脚本插入系统</p>
+</li>
+</ul>
+<h3 id="8同步和异步请求有什么区别">8、同步和异步请求有什么区别？</h3>
+<p>同步请求会阻止用户，直到检索到响应，而异步不会阻止用户。</p>
+<h3 id="9ajax使用了哪些技术">9、AJAX使用了哪些技术？</h3>
+<ul>
+<li>HTML / XHTML和CSS - 这些技术用于显示内容和样式。</li>
+<li>DOM - 用于动态显示和与数据交互。</li>
+<li>XML - 用于与服务器之间传送数据</li>
+<li>XMLHttpRequest - 用于客户端和服务器之间的异步通信。</li>
+<li>JavaScript - 主要用于客户端验证。</li>
+</ul>
+<h3 id="10xmlhttprequest的目的是什么">10、XMLHttpRequest的目的是什么？</h3>
+<ul>
+<li>它将后台数据发送到服务器。</li>
+<li>它从服务器请求数据。</li>
+<li>它从服务器接收数据。</li>
+<li>它在不重新加载页面的情况下更新数据。</li>
+</ul>
+<h3 id="11xmlhttprequest的属性是什么">11、XMLHttpRequest的属性是什么？</h3>
+<p>下面给出了XMLHttpRequest对象的重要属性。</p>
+<ul>
+<li>onReadyStateChange - 只要readystate属性发生变化，就会调用它。</li>
+<li>readyState - 表示请求的状态。</li>
+<li>responseText - 它将响应作为文本返回。</li>
+<li>responseXML - 它以XML格式返回响应。</li>
+<li>status - 返回请求的状态编号。</li>
+<li>statusText - 返回状态的详细信息。</li>
+</ul>
+<h3 id="12xmlhttprequest的重要方法是什么">12、XMLHttpRequest的重要方法是什么？</h3>
+<ul>
+<li>abort() - 用于取消当前请求。</li>
+<li>getAllResponseHeaders() - 返回标题详细信息。</li>
+<li>getResponseHeader() - 返回特定的标题详细信息。</li>
+<li>open() - 用于打开请求。</li>
+<li>send() - 用于发送请求。</li>
+<li>setRequestHeader() - 它添加了请求标头。</li>
+</ul>
+<h3 id="13xmlhttprequest使用的open方法有哪些类型">13、XMLHttpRequest使用的open()方法有哪些类型？</h3>
+<ul>
+<li>open(method,URL) - 它打开指定get或post方法和URL的请求。</li>
+<li>open(method,URL,async) - 它与上面相同但是指定异步或不指定。</li>
+<li>open(method,URL,async,userName,password) - 与上面相同，但指定用户名和密码。</li>
+</ul>
+<h3 id="14xmlhttprequest使用的send方法有哪些类型">14、XMLHttpRequest使用的send()方法有哪些类型？</h3>
+<ul>
+<li>send() - 它发送get请求</li>
+<li>send(string) - 发送帖子请求。</li>
+</ul>
+<h3 id="15回调函数在ajax中的作用是什么">15、回调函数在AJAX中的作用是什么？</h3>
+<p>回调函数将函数作为参数传递给另一个函数。如果我们必须在网站上执行各种AJAX任务，那么我们可以创建一个用于执行XMLHttpRequest的函数和一个用于执行每个AJAX任务的回调函数。</p>
+<h3 id="16ajax中的json是什么">16、AJAX中的JSON是什么？</h3>
+<p>JSON代表JavaScript Object Notation。在AJAX中，它用于在浏览器和服务器之间交换数据。它很容易理解，数据交换比XML快。它支持数组，对象，字符串，数字和值。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">onreadystatechange</span>  <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(){    
+      <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">readyState</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">4</span>)   
+      {
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">jsonObj</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">responseText</span>); <span style="color:#75715e">//JSON.parse()返回JSON对象   
+</span><span style="color:#75715e"></span>        document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;date&#34;</span>).<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">jsonObj</span>.<span style="color:#a6e22e">date</span>;
+        document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;time&#34;</span>).<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">jsonObj</span>.<span style="color:#a6e22e">time</span>;
+      }
+   }
+</code></pre></div><h3 id="17调试ajax应用程序的工具有哪些">17、调试AJAX应用程序的工具有哪些？</h3>
+<p>有几种用于调试AJAX应用程序的工具。</p>
+<ul>
+<li>适用于Mozilla Firefox的Firebug</li>
+<li>适用于IE的Fiddler（Internet Explorer）</li>
+<li>JavaScript HTML调试器</li>
+<li>MyEclipse AJAX工具</li>
+<li>脚本调试器</li>
+</ul>
+<h3 id="18ajax中的回发类型有哪些">18、AJAX中的回发类型有哪些？</h3>
+<p>在AJAX中有两种类型的回发。</p>
+<ul>
+<li>同步回发 - 它会阻止客户端直到操作完成。</li>
+<li>异步回发 - 它不会阻止客户端。</li>
+</ul>
+<h3 id="19ajax中请求的准备状态有哪些">19、AJAX中请求的准备状态有哪些？</h3>
+<p>在AJAX中有5个请求的就绪状态。</p>
+<ul>
+<li>0：意味着未被发现</li>
+<li>1：表示已打开</li>
+<li>2：表示HEADERS_RECEIVED</li>
+<li>3：表示装载</li>
+<li>4：表示完成</li>
+</ul>
+<h3 id="20常见的ajax框架是什么">20、常见的AJAX框架是什么？</h3>
+<ul>
+<li>Dojo Toolkit</li>
+<li>YUI</li>
+<li>Google Web Toolkit（GWT）</li>
+<li>Spry</li>
+<li>MooTools</li>
+<li>Prototype</li>
+</ul>
+<h3 id="21你如何测试ajax代码">21、你如何测试AJAX代码？</h3>
+<p>JUnit是客户端JavaScript的开源单元测试框架。需要创建测试用例。单元测试用例是一个代码，用于确保程序逻辑按预期工作。</p>
+<h3 id="22javascript和ajax有什么区别">22、JavaScript和AJAX有什么区别？</h3>
+<table>
+<thead>
+<tr>
+<th>JavaScript</th>
+<th>AJAX</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JavaScript是一种基于对象的脚本语言</td>
+<td>AJAX是一组相互关联的技术，如JavaScript，XML，HTML，CSS等</td>
+</tr>
+<tr>
+<td>它请求服务器并等待响应</td>
+<td>它向服务器发送请求，不等待响应</td>
+</tr>
+<tr>
+<td>重新加载页面时会占用更多带宽</td>
+<td>它不会重新加载页面，因此占用的带宽更少</td>
+</tr>
+</tbody>
+</table>
+
+                </section>
+            </article>
+
+            
+
+            
+
+            
+                <ul id="post-list" class="archive readmore">
+    <h3>阅读更多</h3>
+
+    
+    
+    
+        <li>
+            <a href="/blog/posts/php-curl-%E5%8F%91%E8%B5%B7get%E5%92%8Cpost%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/">Php Curl 发起get和post网络请求<aside class="dates">Feb 25 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/windows-phpstduy-nginx-504-gateway-timeout/">Windows Phpstduy Nginx 504 Gateway Timeout<aside class="dates">Feb 25 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/js%E5%9C%A8%E4%B8%8D%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E6%B7%BB%E5%8A%A0%E6%88%96%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0/">Js在不改变原数组的情况下，添加或删除指定元素<aside class="dates">Feb 23 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/js%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C-%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E5%92%8C%E4%B8%8D%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/">Js数组操作 改变原数组和不改变原数组的方法整理<aside class="dates">Feb 23 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/echart%E6%95%A3%E7%82%B9%E5%9B%BE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9B%BE%E6%A0%87/">Echart散点图自定义图标<aside class="dates">Feb 7 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/php-%E6%89%A7%E8%A1%8C%E8%B6%85%E6%97%B6/">Php 执行超时<aside class="dates">Feb 6 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/thinkphp-restful-api%E5%90%8C%E4%B8%80%E4%B8%AA%E5%AD%97%E6%AE%B5%E5%A4%9A%E4%B8%AA%E5%80%BC%E6%9F%A5%E8%AF%A2/">Thinkphp Restful API同一个字段多个值查询<aside class="dates">Feb 4 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/vue%E4%B8%AD%E4%BD%BFinput%E5%92%8Cel-input%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96%E7%84%A6%E7%82%B9%E7%9A%84%E5%A4%84%E7%90%86/">Vue中使input和el Input自动获取焦点的处理<aside class="dates">Jan 27 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/element-ui%E7%BB%84%E4%BB%B6el-dialog%E5%AE%BD%E5%BA%A6%E7%9A%84%E4%BF%AE%E6%94%B9/">Element Ui组件el Dialog宽度的修改<aside class="dates">Dec 31 2020</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/vue%E4%B8%AD%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%AD%90%E7%BB%84%E4%BB%B6%E5%8F%82%E6%95%B0%E4%BF%AE%E6%94%B9%E7%9A%84%E5%8A%A8%E6%80%81%E7%9B%91%E5%90%AC/">Vue中父组件传子组件参数修改的动态监听<aside class="dates">Dec 30 2020</aside></a>
+        </li>
+    
+</ul>
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="https://github.com/yerkes">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2021 <i class="fa fa-heart" aria-hidden="true"></i> 余不二五
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://buera.top/blog/js/jquery-3.3.1.min.js"></script>
+<script src="http://buera.top/blog/js/main.js"></script>
+<script src="http://buera.top/blog/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

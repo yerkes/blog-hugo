@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>promise on 余不二五</title>
+    <link>http://buera.top/blog/tags/promise/</link>
+    <description>Recent content in promise on 余不二五</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 01 Jun 2020 22:48:44 +0800</lastBuildDate><atom:link href="http://buera.top/blog/tags/promise/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Promise的介绍与理解</title>
+      <link>http://buera.top/blog/posts/promise%E7%9A%84%E4%BB%8B%E7%BB%8D%E4%B8%8E%E7%90%86%E8%A7%A3/</link>
+      <pubDate>Mon, 01 Jun 2020 22:48:44 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/promise%E7%9A%84%E4%BB%8B%E7%BB%8D%E4%B8%8E%E7%90%86%E8%A7%A3/</guid>
+      <description>promise是什么？ 1、主要用于异步计算
+2、可以将异步操作队列化，按照期望的顺序执行，返回符合预期的结果
+3、可以在对象之间传递和操作promise，帮助我们处理队列
+为什么会有promise？ 为了避免界面冻结（任务）
+ 同步：假设你去了一家饭店，找个位置，叫来服务员，这个时候服务员对你说，对不起我是“同步”服务员，我要服务完这张桌子才能招呼你。那桌客人明明已经吃上了，你只是想要个菜单，这么小的动作，服务员却要你等到别人的一个大动作完成之后，才能再来招呼你，这个便是同步的问题：也就是“顺序交付的工作1234，必须按照1234的顺序完成”。 异步：则是将耗时很长的A交付的工作交给系统之后，就去继续做B交付的工作，。等到系统完成了前面的工作之后，再通过回调或者事件，继续做A剩下的工作。 AB工作的完成顺序，和交付他们的时间顺序无关，所以叫“异步”。  异步操作的常见语法  事件监听  document.getElementById(&amp;#39;#start&amp;#39;).addEventListener(&amp;#39;click&amp;#39;, start, false); function start() { // 响应事件，进行相应的操作 } // jquery on 监听 $(&amp;#39;#start&amp;#39;).on(&amp;#39;click&amp;#39;, start) 回调  // 比较常见的有ajax $.ajax(&amp;#39;http://www.wyunfei.com/&amp;#39;, { success (res) { // 这里可以监听res返回的数据做回调逻辑的处理  } }) // 或者在页面加载完毕后回调 $(function() { // 页面结构加载完成，做回调逻辑处理 }) 有了nodeJS之后&amp;hellip;对异步的依赖进一步加剧了 大家都知道在nodeJS出来之前PHP、Java、python等后台语言已经很成熟了，nodejs要想能够有自己的一片天，那就得拿出点自己的绝活：
+无阻塞高并发，是nodeJS的招牌，要达到无阻塞高并发异步是其基本保障 举例：从数据库查询数据，PHP第一个任务查询数据，后面有了新任务，那么后面任务会被挂起排队；而nodeJS是第一个任务挂起交给数据库去跑，然后去接待第二个任务交给对应的系统组件去处理挂起，接着去接待第三个任务&amp;hellip;
+那这样子的处理必然要依赖于异步操作
+异步回调的问题：  之前处理异步是通过纯粹的回调函数的形式进行处理 很容易进入到回调地狱中，剥夺了函数return的能力 问题可以解决，但是难以读懂，维护困难 稍有不慎就会踏入回调地狱 - 嵌套层次深，不好维护  一般情况我们一次性调用API就可以完成请求。 有些情况需要多次调用服务器API，就会形成一个链式调用，比如为了完成一个功能，我们需要调用API1、API2、API3，依次按照顺序进行调用，这个时候就会出现回调地狱的问题
+promise  promise是一个对象，对象和函数的区别就是对象可以保存状态，函数不可以（闭包除外） 并未剥夺函数return的能力，因此无需层层传递callback，进行回调获取数据 代码风格，容易理解，便于维护 多个异步等待合并便于解决  promise详解 new Promise( function (resolve, reject) { // 一段耗时的异步操作  resolve(&amp;#39;成功&amp;#39;) // 数据处理完成  // reject(&amp;#39;失败&amp;#39;) // 数据处理出错  } ).</description>
+    </item>
+    
+  </channel>
+</rss>

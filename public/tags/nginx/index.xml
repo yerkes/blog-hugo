@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nginx on 余不二五</title>
+    <link>http://buera.top/blog/tags/nginx/</link>
+    <description>Recent content in nginx on 余不二五</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 25 Feb 2021 15:32:07 +0800</lastBuildDate><atom:link href="http://buera.top/blog/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows Phpstduy Nginx 504 Gateway Timeout</title>
+      <link>http://buera.top/blog/posts/windows-phpstduy-nginx-504-gateway-timeout/</link>
+      <pubDate>Thu, 25 Feb 2021 15:32:07 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/windows-phpstduy-nginx-504-gateway-timeout/</guid>
+      <description>server { listen 80; server_name localhost; root &amp;quot;E:/phpstudy_pro/WWW&amp;quot;; location / { index index.php index.html; error_page 400 /error/400.html; error_page 403 /error/403.html; error_page 404 /error/404.html; error_page 500 /error/500.html; error_page 501 /error/501.html; error_page 502 /error/502.html; error_page 503 /error/503.html; error_page 504 /error/504.html; error_page 505 /error/505.html; error_page 506 /error/506.html; error_page 507 /error/507.html; error_page 509 /error/509.html; error_page 510 /error/510.html; autoindex off; } location ~ \.php(.*)$ { fastcgi_pass 127.0.0.1:9000; fastcgi_index index.php; fastcgi_split_path_info ^((?U).+\.php)(/?.+)$; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; fastcgi_param PATH_INFO $fastcgi_path_info; fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info; include fastcgi_params; #fastcgi连接超时时间，默认60秒 fastcgi_connect_timeout 3600; #nginx 进程向 fastcgi 进程发送请求过程的超时时间，默认值60秒 fastcgi_send_timeout 3600; # fastcgi 进程向 nginx 进程发送输出过程的超时时间，默认值60秒 fastcgi_read_timeout 3600; #nginx跟后端服务器连接超时时间(代理连接超时) proxy_connect_timeout 3800s; #后端服务器数据回传时间(代理发送超时) proxy_send_timeout 3600s; #连接成功后，后端服务器响应时间(代理接收超时) proxy_read_timeout 3600s; fastcgi_buffers 8 128k; fastcgi_buffer_size 128k; fastcgi_busy_buffers_size 256k; fastcgi_temp_file_write_size 256k; send_timeout 3600; } } </description>
+    </item>
+    
+  </channel>
+</rss>

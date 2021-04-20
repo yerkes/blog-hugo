@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>正则表达式 on 余不二五</title>
+    <link>http://buera.top/blog/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+    <description>Recent content in 正则表达式 on 余不二五</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 11 Mar 2020 15:24:33 +0800</lastBuildDate><atom:link href="http://buera.top/blog/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>正则表达式的test()、exec()、compile()对象</title>
+      <link>http://buera.top/blog/posts/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84testexeccompile%E5%AF%B9%E8%B1%A1/</link>
+      <pubDate>Wed, 11 Mar 2020 15:24:33 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84testexeccompile%E5%AF%B9%E8%B1%A1/</guid>
+      <description>使用RegExp对象 在JavaScript中，RegExp对象是一个预定了属性和方法的正则表达式对象
+ test()
+ test()方法用于检测一个字符串是否匹配某个模式，如果字符串中含有匹配的文本，则返回true，否则返回false。
+var part = /e/; var res = part.test(&amp;#34;I love coding&amp;#34;); console.log(res);//返回true  exec()
+ exec()函数返回一个数组，其中存放匹配的结果。如果未找到匹配，则返回值为null。
+var part = /e/; var res = part.exec(&amp;#34;I love coding&amp;#34;); console.log(res);//返回e,下标为5的e  compile()
+  compile()方法用于改变RegExp。 compile()既可以改变检索模式，也可以添加或删除第二个参数  var part = new RegExp(&amp;#34;e&amp;#34;); document.write(part.test(&amp;#34;I love coding&amp;#34;));//输出true part.compile(&amp;#34;b&amp;#34;);//改变检索值 document.write(part.test(&amp;#34;I love coding&amp;#34;));//输出flase </description>
+    </item>
+    
+  </channel>
+</rss>

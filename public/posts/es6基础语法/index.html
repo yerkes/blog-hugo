@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="author" content="余不二五">
+		<meta name="description" content="工欲善其事必先利其器">
+		<meta name="generator" content="Hugo 0.76.5" />
+		<title>ES6基础语法 &middot; 余不二五</title>
+		<link rel="shortcut icon" href="http://buera.top/blog/images/favicon.ico">
+		<link rel="stylesheet" href="http://buera.top/blog/css/style.css">
+		<link rel="stylesheet" href="http://buera.top/blog/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="http://buera.top/blog/css/font-awesome.min.css">
+		
+
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://buera.top/blog/'> <span class="arrow">←</span>首页</a>
+	
+	<a href='http://buera.top/blog/posts'>归档</a>
+	<a href='http://buera.top/blog/tags'>标签</a>
+	<a href='http://buera.top/blog/about'>关于</a>
+
+	
+
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        ES6基础语法
+                    </h1>
+                    <h2 class="headline">
+                    Jul 14, 2020 22:52
+                    · 780 words
+                    · 4 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://buera.top/blog/tags/es6">ES6</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <h4 id="es6--函数">ES6  函数</h4>
+<p><strong>1、this ：this代表当前正在执行的对象</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">function <span style="color:#66d9ef">fn</span> () {
+  console.log(this)
+}
+<span style="color:#66d9ef">fn</span>() <span style="color:#75715e">// window 
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> obj <span style="color:#f92672">=</span> new <span style="color:#66d9ef">fn</span>();  <span style="color:#75715e">// { }
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">fn</span>.call({ name:<span style="color:#e6db74">&#34;1&#34;</span> })  <span style="color:#75715e">// { name:&#39;1&#39; }
+</span></code></pre></div><p><strong>2、箭头函数</strong></p>
+<p>（1）箭头函数的this是在定义的时候就固定不变了</p>
+<p>（2）箭头函数  没有自己的this</p>
+<p>（3）箭头函数 不能当类(构造器)使用  不可以 new</p>
+<p>（4）箭头函数  没有 arguments</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fn</span> <span style="color:#f92672">=</span> () =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">this</span>);
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">arguments</span>);
+  }
+  <span style="color:#a6e22e">fn</span>()   <span style="color:#75715e">// undefined    严格模式下    在非严格模式下是 window 
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">fn</span>();  <span style="color:#75715e">// undefined
+</span></code></pre></div><p>new 一个实例 执行 4 步</p>
+<p>（1）创建一个空对象</p>
+<p>（2） 执行构造器 Person 把this指向这个 {}</p>
+<p>（3） 添加属性</p>
+<p>（4） 返回当前实例</p>
+<p>fn.call({ name:&ldquo;1&rdquo; })  // undefined</p>
+<p><strong>3、怎么改变this的指向</strong></p>
+<p>call ()</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">  <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">person</span> (<span style="color:#a6e22e">params</span>) {
+     <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">params</span>
+     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">name</span>);    <span style="color:#75715e">//  27
+</span><span style="color:#75715e"></span>   }
+   <span style="color:#a6e22e">person</span>.<span style="color:#a6e22e">call</span>({},<span style="color:#ae81ff">27</span>)
+</code></pre></div><p>bind （）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">  <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">person</span> (<span style="color:#a6e22e">params</span>) {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">params</span>
+     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">this</span>,<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">name</span>);    <span style="color:#75715e">//  27
+</span><span style="color:#75715e"></span>   }
+   <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fn2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">person</span>.<span style="color:#a6e22e">bind</span>({<span style="color:#a6e22e">age</span><span style="color:#f92672">:</span><span style="color:#ae81ff">22</span>},<span style="color:#e6db74">&#39;小花&#39;</span>)
+   <span style="color:#a6e22e">fn2</span>()
+</code></pre></div><hr>
+<h4 id="es6-数组-方法">ES6 数组 方法</h4>
+<p><strong>1、map返回一个新数组 长度不变</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">9</span>]
+
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">newArr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">v</span> =&gt; <span style="color:#a6e22e">v</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)  <span style="color:#75715e">// [2, 4, 6, 8, 10]
+</span><span style="color:#75715e"></span>
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">newArr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">v</span> =&gt; <span style="color:#a6e22e">v</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">3</span>)   <span style="color:#75715e">//[false, false, true, true, true]
+</span><span style="color:#75715e"></span>
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">newArr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">v</span> =&gt; <span style="color:#a6e22e">v</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">v</span>)   <span style="color:#75715e">//[false, false, 5, 7, 9]
+</span></code></pre></div><p><strong>2、filter返回一个新数组 长度改变 过滤</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">9</span>]
+
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">newArr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">v</span> =&gt; <span style="color:#a6e22e">v</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">3</span>)    <span style="color:#75715e">//  [5, 7, 9]
+</span></code></pre></div><p><strong>3、some只要返回true 就会停止循环</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">9</span>]
+
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">newArr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">some</span>(<span style="color:#a6e22e">v</span> =&gt; <span style="color:#a6e22e">v</span><span style="color:#f92672">===</span><span style="color:#ae81ff">7</span>)    <span style="color:#75715e">//  返回true  循环了3次
+</span></code></pre></div><p><strong>4、every只要返回false 就会停止循环</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">9</span>]
+
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">newArr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">every</span>(<span style="color:#a6e22e">v</span> =&gt; <span style="color:#a6e22e">v</span><span style="color:#f92672">===</span><span style="color:#ae81ff">7</span>  )    <span style="color:#75715e">// 只执行了1次   返回false
+</span></code></pre></div><p><strong>5、forEach普通循环  没有返回值</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">9</span>]
+
+  <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">v</span> =&gt; {
+
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">v</span>);  <span style="color:#75715e">//  1, 3, 5, 7, 9
+</span><span style="color:#75715e"></span>
+  }) 
+</code></pre></div><p><strong>6、find为true的时候就会停止循环  返回 当前的值</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> [{<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;1&#39;</span>,<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>}, {<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;2&#39;</span>,<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>}, {<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;3&#39;</span>,<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>}]
+
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">newObj</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">find</span>(<span style="color:#a6e22e">v</span> =&gt; <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">id</span><span style="color:#f92672">===</span><span style="color:#ae81ff">2</span>)
+
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">newObj</span>);        <span style="color:#75715e">//  {name:&#39;2&#39;,id:2}
+</span></code></pre></div><p><strong>7、findIndex为true的时候就会停止循环  返回 当前的值的下标</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> [{<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;1&#39;</span>,<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>}, {<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;2&#39;</span>,<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>}, {<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;3&#39;</span>,<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>}]
+
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">newObj</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">findIndex</span>(<span style="color:#a6e22e">v</span> =&gt; <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">id</span><span style="color:#f92672">===</span><span style="color:#ae81ff">2</span>)
+
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">newObj</span>);        <span style="color:#75715e">//  返回 1
+</span></code></pre></div><p><strong>8、reduce两个参数 （函数[必须有return]，默认值）</strong></p>
+<p>（1）无默认值</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">9</span>]
+
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">sum</span><span style="color:#f92672">=</span><span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">reduce</span>((<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>)=&gt;{
+
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span><span style="color:#f92672">+</span><span style="color:#a6e22e">b</span>
+
+    <span style="color:#75715e">// a -&gt;1  b-&gt;3         第1次
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// a -&gt;4  b-&gt;5         第2次
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// a -&gt;9  b-&gt;7  ....   第..次
+</span><span style="color:#75715e"></span>
+  })
+
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">sum</span>);      <span style="color:#75715e">// 25
+</span></code></pre></div><p>（2）有默认值</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">9</span>]
+
+    <span style="color:#75715e">// a -&gt;{}  b-&gt;1              第1次
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// a -&gt;{1:[1]}  b-&gt;3         第2次
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// a -&gt;{1:[1],3:[3]}  b-&gt;1   第3次
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// a -&gt;{1:[1,1],3:[3]}  b-&gt;7   第4次  ....
+</span><span style="color:#75715e"></span>
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">newObj</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">reduce</span>((<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>)=&gt;{
+
+           <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">a</span>[<span style="color:#a6e22e">b</span>]) {   <span style="color:#a6e22e">a</span>[<span style="color:#a6e22e">b</span>].<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">b</span>)   } <span style="color:#66d9ef">else</span> {   <span style="color:#a6e22e">a</span>[<span style="color:#a6e22e">b</span>] <span style="color:#f92672">=</span> [<span style="color:#a6e22e">b</span>]   }
+
+           <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span>
+
+  }, {})
+
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">newObj</span>);  <span style="color:#75715e">//{1:[1, 1],3:[3],5:[5],7:[7, 7],9:[9]}
+</span></code></pre></div><p>（3）在antd 3.26 表单回填应用</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">  <span style="color:#a6e22e">mapPropsToFields</span>({ <span style="color:#a6e22e">obj</span> }) {
+
+     <span style="color:#66d9ef">return</span> Object.<span style="color:#a6e22e">keys</span>(<span style="color:#a6e22e">obj</span>).<span style="color:#a6e22e">reduce</span>((<span style="color:#a6e22e">pre</span>, <span style="color:#a6e22e">d</span>) =&gt; {
+
+        <span style="color:#66d9ef">return</span> {
+
+         ...<span style="color:#a6e22e">pre</span>,
+
+         [<span style="color:#a6e22e">d</span>]<span style="color:#f92672">:</span> <span style="color:#a6e22e">Form</span>.<span style="color:#a6e22e">createFormField</span>({ <span style="color:#a6e22e">value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">obj</span>[<span style="color:#a6e22e">d</span>] })
+
+        }
+
+      }, {})
+
+   },
+</code></pre></div><p><strong>9、数组的扩展运算符</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">  <span style="color:#66d9ef">const</span> arr <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
+
+  <span style="color:#66d9ef">const</span> brr <span style="color:#f92672">=</span> [<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>]
+
+  console.log([...arr,...brr]);  <span style="color:#75715e">// [1,2,3,4,5,6]
+</span></code></pre></div><p><strong>10、 fill填充数组</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">str</span><span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> Array(<span style="color:#ae81ff">50</span>).<span style="color:#a6e22e">fill</span>(<span style="color:#e6db74">&#39;-&#39;</span>).<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;&#39;</span>)
+
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">str</span>);  <span style="color:#75715e">//  ---------------------
+</span></code></pre></div><p><strong>11、includes是否包含</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">  <span style="color:#66d9ef">const</span> arr <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
+
+  console.log(arr.includes(<span style="color:#ae81ff">2</span>))   <span style="color:#75715e">// true
+</span></code></pre></div><p><strong>12、flat数组扁平化</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, [<span style="color:#ae81ff">2</span>, [<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>] ] ]
+
+  <span style="color:#75715e">//  默认二维数组扁平化
+</span><span style="color:#75715e"></span>
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">flat</span>() )   <span style="color:#75715e">// [1,2,[3,4] ]
+</span><span style="color:#75715e"></span>
+  <span style="color:#75715e">//  Infinity 多维数组扁平化
+</span><span style="color:#75715e"></span>
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">flat</span>(<span style="color:#66d9ef">Infinity</span>) )  <span style="color:#75715e">// [1,2,3,4]   
+</span></code></pre></div><p><strong>13、Set数组去重</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">   <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">crr</span><span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>]
+
+   <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>([...<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Set</span>(<span style="color:#a6e22e">crr</span>)]);    <span style="color:#75715e">//  [1,2,3,4,5]
+</span></code></pre></div><hr>
+<h4 id="es6-对象-方法">ES6 对象 方法</h4>
+<p><strong>1、Object.assign(新对象，对象1，对象2，..) 合并对象</strong></p>
+<p>注： 是个浅拷贝</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart">   <span style="color:#66d9ef">const</span> obj1 <span style="color:#f92672">=</span> { name:<span style="color:#e6db74">&#34;小花&#34;</span> }
+
+   <span style="color:#66d9ef">const</span> obj2 <span style="color:#f92672">=</span> { age:<span style="color:#ae81ff">20</span> }
+
+   <span style="color:#66d9ef">Object</span>.assign(obj1,obj2) <span style="color:#75715e">// 浅拷贝   { name:&#34;小花&#34;, age:20 }
+</span><span style="color:#75715e"></span>
+   <span style="color:#75715e">//{...obj1,...obj2}        // 浅拷贝   { name:&#34;小花&#34;, age:20 }
+</span></code></pre></div><p><strong>2、keys 取到所有的key值  values 取到所有的value值</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">   <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> { <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;小花&#34;</span>, <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>, <span style="color:#a6e22e">sex</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;男&#34;</span> }
+
+   <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(Object.<span style="color:#a6e22e">keys</span>(<span style="color:#a6e22e">obj</span>));  <span style="color:#75715e">// [&#34;name&#34;, &#34;age&#34;, &#34;sex&#34;]
+</span><span style="color:#75715e"></span>
+   <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(Object.<span style="color:#a6e22e">values</span>(<span style="color:#a6e22e">obj</span>)); <span style="color:#75715e">//  [&#34;小花&#34;, 20, &#34;男&#34;]
+</span></code></pre></div><p><strong>3、Object.entries( )</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  const obj <span style="color:#f92672">=</span> <span style="color:#f92672">{</span> name:<span style="color:#e6db74">&#34;小花&#34;</span>, age:20, sex:<span style="color:#e6db74">&#34;男&#34;</span> <span style="color:#f92672">}</span>
+
+  Object.entries<span style="color:#f92672">(</span>obj<span style="color:#f92672">)</span>   // <span style="color:#f92672">[</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;小花&#34;</span><span style="color:#f92672">]</span>,<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;age&#34;</span>, 20<span style="color:#f92672">]</span>,<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;sex&#34;</span>, <span style="color:#e6db74">&#34;男&#34;</span><span style="color:#f92672">]</span> <span style="color:#f92672">]</span>
+</code></pre></div><p><strong>取出对象里的所有key 和 value</strong></p>
+<p>（1）、reduce</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">       Object.<span style="color:#a6e22e">entries</span>(<span style="color:#a6e22e">obj</span>).<span style="color:#a6e22e">reduce</span>((<span style="color:#a6e22e">v</span>,[<span style="color:#a6e22e">key</span>,<span style="color:#a6e22e">value</span>])=&gt;{
+              <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">key</span>,<span style="color:#a6e22e">value</span>)           <span style="color:#75715e">// name 小花  age 20  sex 男
+</span><span style="color:#75715e"></span>        },<span style="color:#e6db74">&#39;&#39;</span>)
+</code></pre></div><p>（2）、for  of</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">let</span> [key,<span style="color:#66d9ef">value</span>] of Object.entries(obj)) {
+             console.log(key,<span style="color:#66d9ef">value</span>)           <span style="color:#75715e">// name 小花  age 20  sex 男
+</span><span style="color:#75715e"></span>        }
+</code></pre></div><hr>
+<h4 id="es6---promise">ES6   Promise</h4>
+<p>1）对象的状态不受外界影响。Promise对象代表一个异步操作，有三种状态：pending（进行中）、fulfilled（已成功）和rejected（已失败）。</p>
+<p>2）一旦状态改变，就不会再变，任何时候都可以得到这个结果。Promise对象的状态改变，只有两种可能：从pending变为fulfilled和从pending变为rejected。</p>
+<p><img src="https://i.loli.net/2020/10/26/Op7bIY9TziyojqV.png" alt=""></p>
+<p>（1）、特点：处理异步 异步的代码以同步的方式</p>
+<p>（2）、用法 ：<code>new Promise((resolve,reject)=&gt;{ resolve() 成功 reject() 失败 })</code></p>
+<p>（3）、状态：进行中 已成功 已失败  (一旦固定就不会再改变)</p>
+<p><strong>1、 Promise.all()&ndash;用于将多个 Promise 实例，包装成一个新的 Promise 实例   两个promise一起触发</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">url</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://api.baxiaobu.com/index.php/home/v1/register&#34;</span>
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">param</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">qs</span>.<span style="color:#a6e22e">stringify</span>({
+
+  <span style="color:#a6e22e">username</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;1111&#34;</span>,
+
+  <span style="color:#a6e22e">pwd</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;222&#34;</span>
+
+})
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fn0</span> <span style="color:#f92672">=</span> () =&gt; <span style="color:#a6e22e">axios</span>.<span style="color:#a6e22e">post</span>(<span style="color:#a6e22e">url</span>,<span style="color:#a6e22e">param</span>)
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fn1</span> <span style="color:#f92672">=</span> () =&gt; <span style="color:#a6e22e">axios</span>.<span style="color:#a6e22e">post</span>(<span style="color:#a6e22e">url</span>,<span style="color:#a6e22e">param</span>)
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">p0</span> <span style="color:#f92672">=</span> Promise.<span style="color:#a6e22e">all</span>([<span style="color:#a6e22e">fn0</span>(),<span style="color:#a6e22e">fn1</span>()])
+
+<span style="color:#a6e22e">p0</span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">res</span>=&gt;<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">res</span>))
+
+.<span style="color:#66d9ef">catch</span>()
+</code></pre></div><p><strong>2、 async和函数一起用 函数里需要异步方法前面加上  await</strong></p>
+<p>await  不止异步  任何值    两个promise逐步触发</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">URL</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://blogs.zdldove.top/Home/Apis/listWithPage&#34;</span>
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fn</span> () {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">res0</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">axios</span>.<span style="color:#a6e22e">post</span>(<span style="color:#a6e22e">URL</span>)
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">1</span>);
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">res1</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">axios</span>.<span style="color:#a6e22e">post</span>(<span style="color:#a6e22e">URL</span>)
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">res0</span>,<span style="color:#a6e22e">res1</span>);
+}
+<span style="color:#a6e22e">fn</span>()
+</code></pre></div><p><strong>3、async原理</strong></p>
+<p>async === generator + 自动执行器</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">spawn</span> (<span style="color:#a6e22e">genF</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">gen</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">genF</span>()
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">step</span> (<span style="color:#a6e22e">nextF</span>) {
+      <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">nextF</span>()
+      <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">next</span>.<span style="color:#a6e22e">done</span>) {
+         <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">next</span>.<span style="color:#a6e22e">value</span>)}    
+         Promise.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">next</span>.<span style="color:#a6e22e">value</span>)
+          .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">v</span> =&gt; {
+             <span style="color:#a6e22e">step</span>(() =&gt; <span style="color:#a6e22e">gen</span>.<span style="color:#a6e22e">next</span>(<span style="color:#a6e22e">v</span>))
+          })
+      }
+    <span style="color:#a6e22e">step</span>(() =&gt; <span style="color:#a6e22e">gen</span>.<span style="color:#a6e22e">next</span>(<span style="color:#66d9ef">undefined</span>))
+  })
+}
+</code></pre></div><hr>
+<h4 id="es6---解构赋值">ES6   解构赋值</h4>
+<p><strong>1、数组的解构赋值</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">ES5:
+<span style="color:#66d9ef">var</span> a = <span style="color:#ae81ff">1</span>;
+<span style="color:#66d9ef">var</span> b = <span style="color:#ae81ff">2</span>;
+ES6:
+<span style="color:#66d9ef">var</span> [a,b] = [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>]
+<span style="color:#75715e">//以上模式匹配写法
+</span></code></pre></div><p>数组嵌套解构</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">let</span> [a,[[b],c]] = [<span style="color:#ae81ff">1</span>,[[<span style="color:#ae81ff">2</span>],<span style="color:#ae81ff">3</span>]];
+a<span style="color:#75715e">//1</span>
+b<span style="color:#75715e">//2</span>
+c<span style="color:#75715e">//3</span>
+<span style="color:#66d9ef">let</span> [arr,..brr] = [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>];
+arr<span style="color:#75715e">//1</span>
+brr<span style="color:#75715e">//[2,3,4]</span>
+</code></pre></div><p>如果解构不成功，变量的值就是undefined</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">let</span> [a] = [];
+<span style="color:#66d9ef">let</span> [b,a] = [<span style="color:#ae81ff">1</span>];
+<span style="color:#75715e">// a就是undefined
+</span></code></pre></div><p>Set解构，也可以使用数组的解构赋值</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">let</span> [<span style="color:#a6e22e">x</span>,<span style="color:#a6e22e">y</span>,<span style="color:#a6e22e">z</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Set</span>([<span style="color:#e6db74">&#34;a&#34;</span>,<span style="color:#e6db74">&#34;b&#34;</span>,<span style="color:#e6db74">&#34;c&#34;</span>]);
+<span style="color:#a6e22e">x</span> <span style="color:#75715e">//a
+</span></code></pre></div><p><strong>2、对象解构赋值</strong></p>
+<p>对象的解构与数组的解构有一个重要的不同；数组的元素是按次序排列的，变量的取之由他的位置决定；而对象的属性是没有次序的，变量必须与属性同名，才能取到正确的值</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">let</span> {bar,foo} = {foo:<span style="color:#e6db74">&#34;aaa&#34;</span>,bar:<span style="color:#e6db74">&#34;bbb&#34;</span>};
+bar <span style="color:#75715e">// bbb
+</span><span style="color:#75715e"></span>foo <span style="color:#75715e">//aaa
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> {baz,foo} = {foo:<span style="color:#e6db74">&#34;aaa&#34;</span>,bar:<span style="color:#e6db74">&#34;bbb&#34;</span>};
+baz <span style="color:#75715e">//属性不同名是 undefined
+</span></code></pre></div><p><strong>3、数值和布尔值的解构赋值</strong></p>
+<p>解构赋值时，若果右边是数值或者布尔值，则会先转成对象</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">let</span> {toString:s} = <span style="color:#ae81ff">123</span>;
+s === Number.prototype.toString <span style="color:#75715e">//true</span>
+<span style="color:#66d9ef">let</span> {toString:s} = <span style="color:#66d9ef">true</span>;
+s === Boolean.prototype.toString <span style="color:#75715e">//true</span>
+<span style="color:#75715e">//undefined和null无法转为对象，所以对他们解构赋值就会报错</span>
+</code></pre></div>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+                <ul id="post-list" class="archive readmore">
+    <h3>阅读更多</h3>
+
+    
+    
+    
+        <li>
+            <a href="/blog/posts/php-curl-%E5%8F%91%E8%B5%B7get%E5%92%8Cpost%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/">Php Curl 发起get和post网络请求<aside class="dates">Feb 25 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/windows-phpstduy-nginx-504-gateway-timeout/">Windows Phpstduy Nginx 504 Gateway Timeout<aside class="dates">Feb 25 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/js%E5%9C%A8%E4%B8%8D%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E6%B7%BB%E5%8A%A0%E6%88%96%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0/">Js在不改变原数组的情况下，添加或删除指定元素<aside class="dates">Feb 23 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/js%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C-%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E5%92%8C%E4%B8%8D%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/">Js数组操作 改变原数组和不改变原数组的方法整理<aside class="dates">Feb 23 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/echart%E6%95%A3%E7%82%B9%E5%9B%BE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9B%BE%E6%A0%87/">Echart散点图自定义图标<aside class="dates">Feb 7 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/php-%E6%89%A7%E8%A1%8C%E8%B6%85%E6%97%B6/">Php 执行超时<aside class="dates">Feb 6 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/thinkphp-restful-api%E5%90%8C%E4%B8%80%E4%B8%AA%E5%AD%97%E6%AE%B5%E5%A4%9A%E4%B8%AA%E5%80%BC%E6%9F%A5%E8%AF%A2/">Thinkphp Restful API同一个字段多个值查询<aside class="dates">Feb 4 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/vue%E4%B8%AD%E4%BD%BFinput%E5%92%8Cel-input%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96%E7%84%A6%E7%82%B9%E7%9A%84%E5%A4%84%E7%90%86/">Vue中使input和el Input自动获取焦点的处理<aside class="dates">Jan 27 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/element-ui%E7%BB%84%E4%BB%B6el-dialog%E5%AE%BD%E5%BA%A6%E7%9A%84%E4%BF%AE%E6%94%B9/">Element Ui组件el Dialog宽度的修改<aside class="dates">Dec 31 2020</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/vue%E4%B8%AD%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%AD%90%E7%BB%84%E4%BB%B6%E5%8F%82%E6%95%B0%E4%BF%AE%E6%94%B9%E7%9A%84%E5%8A%A8%E6%80%81%E7%9B%91%E5%90%AC/">Vue中父组件传子组件参数修改的动态监听<aside class="dates">Dec 30 2020</aside></a>
+        </li>
+    
+</ul>
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="https://github.com/yerkes">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2021 <i class="fa fa-heart" aria-hidden="true"></i> 余不二五
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://buera.top/blog/js/jquery-3.3.1.min.js"></script>
+<script src="http://buera.top/blog/js/main.js"></script>
+<script src="http://buera.top/blog/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

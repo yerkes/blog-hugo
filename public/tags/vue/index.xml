@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vue on 余不二五</title>
+    <link>http://buera.top/blog/tags/vue/</link>
+    <description>Recent content in Vue on 余不二五</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 30 Dec 2020 18:47:51 +0800</lastBuildDate><atom:link href="http://buera.top/blog/tags/vue/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vue中父组件传子组件参数修改的动态监听</title>
+      <link>http://buera.top/blog/posts/vue%E4%B8%AD%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%AD%90%E7%BB%84%E4%BB%B6%E5%8F%82%E6%95%B0%E4%BF%AE%E6%94%B9%E7%9A%84%E5%8A%A8%E6%80%81%E7%9B%91%E5%90%AC/</link>
+      <pubDate>Wed, 30 Dec 2020 18:47:51 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/vue%E4%B8%AD%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%AD%90%E7%BB%84%E4%BB%B6%E5%8F%82%E6%95%B0%E4%BF%AE%E6%94%B9%E7%9A%84%E5%8A%A8%E6%80%81%E7%9B%91%E5%90%AC/</guid>
+      <description>使用watch监听
+prop:{ uersinfo:{ type:Object, default:()=&amp;gt;{return} } } watch:{ userinfo(newVal,oldVal){ console.log(newVal,oldVal) } } </description>
+    </item>
+    
+  </channel>
+</rss>

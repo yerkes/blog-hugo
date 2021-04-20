@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="author" content="余不二五">
+		<meta name="description" content="工欲善其事必先利其器">
+		<meta name="generator" content="Hugo 0.76.5" />
+		<title>分别使用XHR、jQuery和Fetch实现AJAX &middot; 余不二五</title>
+		<link rel="shortcut icon" href="http://buera.top/blog/images/favicon.ico">
+		<link rel="stylesheet" href="http://buera.top/blog/css/style.css">
+		<link rel="stylesheet" href="http://buera.top/blog/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="http://buera.top/blog/css/font-awesome.min.css">
+		
+
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://buera.top/blog/'> <span class="arrow">←</span>首页</a>
+	
+	<a href='http://buera.top/blog/posts'>归档</a>
+	<a href='http://buera.top/blog/tags'>标签</a>
+	<a href='http://buera.top/blog/about'>关于</a>
+
+	
+
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        分别使用XHR、jQuery和Fetch实现AJAX
+                    </h1>
+                    <h2 class="headline">
+                    Aug 9, 2020 16:50
+                    · 786 words
+                    · 4 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://buera.top/blog/tags/ajax">AJAX</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>本文详细讲述如何使用原生 JS、jQuery 和 Fetch 来实现 AJAX。</p>
+<p>AJAX 即 Asynchronous JavaScript and XML，异步的 JavaScript 和 XML。使用 AJAX 可以无刷新地向服务端发送请求接收服务端响应，并更新页面。</p>
+<h2 id="一原生-js-实现-ajax">一、原生 JS 实现 AJAX</h2>
+<p>JS 实现 AJAX 主要基于浏览器提供的 XMLHttpRequest（XHR）类，所有现代浏览器（IE7+、Firefox、Chrome、Safari 以及 Opera）均内建 XMLHttpRequest 对象。</p>
+<h4 id="1-获取xmlhttprequest对象">1. 获取XMLHttpRequest对象</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// 获取XMLHttpRequest对象
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">xhr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>();
+</code></pre></div><p>如果需要兼容老版本的 IE (IE5, IE6) 浏览器，则可以使用 ActiveX 对象：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">xhr</span>;
+<span style="color:#66d9ef">if</span> (window.<span style="color:#a6e22e">XMLHttpRequest</span>) { <span style="color:#75715e">// Mozilla, Safari...
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">xhr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>();
+} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (window.<span style="color:#a6e22e">ActiveXObject</span>) { <span style="color:#75715e">// IE
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">try</span> {
+    <span style="color:#a6e22e">xhr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ActiveXObject</span>(<span style="color:#e6db74">&#39;Msxml2.XMLHTTP&#39;</span>);
+  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+    <span style="color:#66d9ef">try</span> {
+      <span style="color:#a6e22e">xhr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ActiveXObject</span>(<span style="color:#e6db74">&#39;Microsoft.XMLHTTP&#39;</span>);
+    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {}
+  }
+}
+</code></pre></div><h4 id="2-发送一个-http-请求">2. 发送一个 HTTP 请求</h4>
+<p>接下来，我们需要打开一个URL，然后发送这个请求。分别要用到 XMLHttpRequest 的 open() 方法和 send() 方法。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// GET
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">xhr</span>;
+<span style="color:#66d9ef">if</span> (window.<span style="color:#a6e22e">XMLHttpRequest</span>) { <span style="color:#75715e">// Mozilla, Safari...
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">xhr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>();
+} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (window.<span style="color:#a6e22e">ActiveXObject</span>) { <span style="color:#75715e">// IE
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">try</span> {
+    <span style="color:#a6e22e">xhr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ActiveXObject</span>(<span style="color:#e6db74">&#39;Msxml2.XMLHTTP&#39;</span>);
+  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+    <span style="color:#66d9ef">try</span> {
+      <span style="color:#a6e22e">xhr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ActiveXObject</span>(<span style="color:#e6db74">&#39;Microsoft.XMLHTTP&#39;</span>);
+    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {}
+  }
+}
+<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">xhr</span>) {
+  <span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;/api?username=admin&amp;password=root&#39;</span>, <span style="color:#66d9ef">true</span>);
+  <span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">send</span>(<span style="color:#66d9ef">null</span>);
+}
+<span style="color:#75715e">// POST
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">xhr</span>;
+<span style="color:#66d9ef">if</span> (window.<span style="color:#a6e22e">XMLHttpRequest</span>) { <span style="color:#75715e">// Mozilla, Safari...
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">xhr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>();
+} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (window.<span style="color:#a6e22e">ActiveXObject</span>) { <span style="color:#75715e">// IE
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">try</span> {
+    <span style="color:#a6e22e">xhr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ActiveXObject</span>(<span style="color:#e6db74">&#39;Msxml2.XMLHTTP&#39;</span>);
+  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+    <span style="color:#66d9ef">try</span> {
+      <span style="color:#a6e22e">xhr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ActiveXObject</span>(<span style="color:#e6db74">&#39;Microsoft.XMLHTTP&#39;</span>);
+    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {}
+  }
+}
+<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">xhr</span>) {
+  <span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#39;POST&#39;</span>, <span style="color:#e6db74">&#39;/api&#39;</span>, <span style="color:#66d9ef">true</span>);
+  <span style="color:#75715e">// 设置 Content-Type 为 application/x-www-form-urlencoded
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// 以表单的形式传递数据
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">setRequestHeader</span>(<span style="color:#e6db74">&#39;Content-Type&#39;</span>, <span style="color:#e6db74">&#39;application/x-www-form-urlencoded&#39;</span>);
+  <span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#39;username=admin&amp;password=root&#39;</span>);
+}
+</code></pre></div><p><code>open()</code> 方法有三个参数：</p>
+<ul>
+<li><code>open()</code> 的第一个参数是 HTTP 请求方式 – GET，POST，HEAD 或任何服务器所支持的您想调用的方式。按照HTTP规范，该参数要大写；否则，某些浏览器(如Firefox)可能无法处理请求。有关HTTP请求方法的详细信息可参考 <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html</a></li>
+<li>第二个参数是请求页面的 URL。由于同源策略（Same origin policy）该页面不能为第三方域名的页面。同时一定要保证在所有的页面中都使用准确的域名，否则调用 <code>open()</code> 会得到 <code>permission denied</code> 的错误提示。</li>
+<li>第三个参数设置请求是否为异步模式。如果是 <code>TRUE</code>，JavaScript 函数将继续执行，而不等待服务器响应。这就是 AJAX 中的 A。</li>
+</ul>
+<p>如果第一个参数是 <code>GET</code>，则可以直接将参数放在 url 后面，如：<code>http://nodejh.com/api?name=admint&amp;password=root</code>。</p>
+<p>如果第一个参数是 <code>POST</code>，则需要将参数写在 send() 方法里面。send() 方法的参数可以是任何想送给服务器的数据。这时数据要以字符串的形式送给服务器，如：<code>name=admint&amp;password=root</code>。或者也可以传递 JSON 格式的数据：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// 设置 Content-Type 为 application/json
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">setRequestHeader</span>(<span style="color:#e6db74">&#39;Content-Type&#39;</span>, <span style="color:#e6db74">&#39;application/json&#39;</span>);
+<span style="color:#75715e">// 传递 JSON 字符串
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({ <span style="color:#a6e22e">username</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;admin&#39;</span>, <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;root&#39;</span> }));
+</code></pre></div><p>如果不设置请求头，原生 AJAX 会默认使用 Content-Type 是 <code>text/plain;charset=UTF-8</code> 的方式发送数据。</p>
+<p>关于 Content-Type 更详细的内容，将在以后的文章中解释说明。</p>
+<h4 id="3-处理服务器的响应">3. 处理服务器的响应</h4>
+<p>当发送请求时，我们需要指定如何处理服务器的响应，我们需要用到 onreadystatechange 属性来检测服务器的响应状态。使用 onreadystatechange 有两种方式，一是直接 onreadystatechange 属性指定一个可调用的函数名，二是使用一个匿名函数：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// 方法一 指定可调用的函数
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">onreadystatechange</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">onReadyStateChange</span>;
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onReadyStateChange</span>() {
+  <span style="color:#75715e">// do something
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#75715e">// 方法二 使用匿名函数
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">onreadystatechange</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(){
+    <span style="color:#75715e">// do the thing
+</span><span style="color:#75715e"></span>};
+</code></pre></div><p>接下来我们需要在内部利用 readyState 属性来获取当前的状态，当 readyState 的值为 4，就意味着一个完整的服务器响应已经收到了，接下来就可以处理该响应：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// readyState的取值如下
+</span><span style="color:#75715e">// 0 (未初始化)
+</span><span style="color:#75715e">// 1 (正在装载)
+</span><span style="color:#75715e">// 2 (装载完毕)
+</span><span style="color:#75715e">// 3 (交互中)
+</span><span style="color:#75715e">// 4 (完成)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">readyState</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">4</span>) {
+    <span style="color:#75715e">// everything is good, the response is received
+</span><span style="color:#75715e"></span>} <span style="color:#66d9ef">else</span> {
+    <span style="color:#75715e">// still not ready
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p>完整代码如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// POST
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">xhr</span>;
+<span style="color:#66d9ef">if</span> (window.<span style="color:#a6e22e">XMLHttpRequest</span>) { <span style="color:#75715e">// Mozilla, Safari...
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">xhr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>();
+} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (window.<span style="color:#a6e22e">ActiveXObject</span>) { <span style="color:#75715e">// IE
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">try</span> {
+    <span style="color:#a6e22e">xhr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ActiveXObject</span>(<span style="color:#e6db74">&#39;Msxml2.XMLHTTP&#39;</span>);
+  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+    <span style="color:#66d9ef">try</span> {
+      <span style="color:#a6e22e">xhr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ActiveXObject</span>(<span style="color:#e6db74">&#39;Microsoft.XMLHTTP&#39;</span>);
+    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {}
+  }
+}
+<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">xhr</span>) {
+  <span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">onreadystatechange</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">onReadyStateChange</span>;
+  <span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#39;POST&#39;</span>, <span style="color:#e6db74">&#39;/api&#39;</span>, <span style="color:#66d9ef">true</span>);
+  <span style="color:#75715e">// 设置 Content-Type 为 application/x-www-form-urlencoded
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// 以表单的形式传递数据
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">setRequestHeader</span>(<span style="color:#e6db74">&#39;Content-Type&#39;</span>, <span style="color:#e6db74">&#39;application/x-www-form-urlencoded&#39;</span>);
+  <span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#39;username=admin&amp;password=root&#39;</span>);
+}
+
+
+<span style="color:#75715e">// onreadystatechange 方法
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onReadyStateChange</span>() {
+  <span style="color:#75715e">// 该函数会被调用四次
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">readyState</span>);
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">readyState</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">4</span>) {
+    <span style="color:#75715e">// everything is good, the response is received
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">200</span>) {
+      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">responseText</span>);
+    } <span style="color:#66d9ef">else</span> {
+      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;There was a problem with the request.&#39;</span>);
+    }
+  } <span style="color:#66d9ef">else</span> {
+    <span style="color:#75715e">// still not ready
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;still not ready...&#39;</span>);
+  }
+}
+</code></pre></div><p>当然我们可以用onload来代替onreadystatechange等于4的情况，因为onload只在状态为4的时候才被调用，代码如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">onload</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {    <span style="color:#75715e">// 调用onload
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">200</span>) {    <span style="color:#75715e">// status为200表示请求成功
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;执行成功&#39;</span>);
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;执行出错&#39;</span>);
+    }
+}
+</code></pre></div><p>然而需要注意的是，IE对 onload 属性的支持并不友好。除了 onload 还有以下几个属性也可以用来监测响应状态：</p>
+<ul>
+<li>onloadstart</li>
+<li>onprogress</li>
+<li>onabort</li>
+<li>ontimeout</li>
+<li>onerror</li>
+<li>onloadend</li>
+</ul>
+<h2 id="二-jquery-实现-ajax">二、 jQuery 实现 AJAX</h2>
+<p>jQuery 作为一个使用人数最多的库，其 AJAX 很好的封装了原生 AJAX 的代码，在兼容性和易用性方面都做了很大的提高，让 AJAX 的调用变得非常简单。下面便是一段简单的 jQuery 的 AJAX 代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">$</span>.<span style="color:#a6e22e">ajax</span>({
+  <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>,
+  <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/api&#39;</span>,
+  <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">username</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;admin&#39;</span>, <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;root&#39;</span> }
+})
+  .<span style="color:#a6e22e">done</span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">msg</span>) {
+    <span style="color:#a6e22e">alert</span>( <span style="color:#e6db74">&#39;Data Saved: &#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">msg</span> );
+  });
+</code></pre></div><p>对比原生 AJAX 的实现，使用 jQuery 就异常简单了。当然我们平时用的最多的，是下面两种更简单的方式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// GET
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/api&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">res</span>) {
+  <span style="color:#75715e">// do something
+</span><span style="color:#75715e"></span>});
+
+<span style="color:#75715e">// POST
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">username</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;admin&#39;</span>,
+  <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;root&#39;</span>
+};
+<span style="color:#a6e22e">$</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#39;/api&#39;</span>, <span style="color:#a6e22e">data</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">res</span>) {
+  <span style="color:#75715e">// do something
+</span><span style="color:#75715e"></span>});
+</code></pre></div><h2 id="三fetch-api">三、Fetch API</h2>
+<p>使用 jQuery 虽然可以大大简化 XMLHttpRequest 的使用，但 XMLHttpRequest 本质上但并不是一个设计优良的 API： + 不符合关注分离（Separation of Concerns）的原则 + 配置和调用方式非常混乱 + 使用事件机制来跟踪状态变化 + 基于事件的异步模型没有现代的 Promise，generator/yield，async/await 友好</p>
+<p>Fetch API 旨在修正上述缺陷，它提供了与 HTTP 语义相同的 JS 语法，简单来说，它引入了 <code>fetch()</code> 这个实用的方法来获取网络资源。</p>
+<p>Fetch 的浏览器兼容图如下：</p>
+<p><img src="https://i.loli.net/2020/10/26/Qu5eG6bmsYoBqL3.png" alt=""></p>
+<p>原生支持率并不高，幸运的是，引入下面这些 polyfill 后可以完美支持 IE8+：</p>
+<ul>
+<li>由于 IE8 是 ES3，需要引入 ES5 的 polyfill: <a href="https://github.com/es-shims/es5-shim">es5-shim, es5-sham</a></li>
+<li>引入 Promise 的 polyfill: <a href="https://github.com/stefanpenner/es6-promise">es6-promise</a></li>
+<li>引入 fetch 探测库：<a href="https://github.com/camsong/fetch-detector">fetch-detector</a></li>
+<li>引入 fetch 的 polyfill: <a href="https://github.com/camsong/fetch-ie8">fetch-ie8</a></li>
+<li>可选：如果你还使用了 jsonp，引入 <a href="https://github.com/camsong/fetch-jsonp">fetch-jsonp</a></li>
+<li>可选：开启 Babel 的 runtime 模式，现在就使用 async/await</li>
+</ul>
+<h4 id="1-一个使用-fetch-的例子">1. 一个使用 Fetch 的例子</h4>
+<p>先看一个简单的 Fetch API 的例子 🌰 ：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api&#39;</span>).<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">response</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
+}).<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">data</span>) {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>);
+}).<span style="color:#66d9ef">catch</span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">error</span>) {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Oops, error: &#39;</span>, <span style="color:#a6e22e">error</span>);
+});
+</code></pre></div><p>使用 ES6 的箭头函数后：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api&#39;</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>())
+  .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">data</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>))
+  .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">error</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Oops, error: &#39;</span>, <span style="color:#a6e22e">error</span>))
+</code></pre></div><p>可以看出使用Fetch后我们的代码更加简洁和语义化，链式调用的方式也使其更加流畅和清晰。但这种基于 Promise 的写法还是有 Callback 的影子，我们还可以用 <code>async/await</code> 来做最终优化：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span>() {
+  <span style="color:#66d9ef">try</span> {
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">url</span>);
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>);
+  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Oops, error: &#39;</span>, <span style="color:#a6e22e">error</span>);
+  }
+}
+</code></pre></div><p>使用 <code>await</code> 后，写代码就更跟同步代码一样。<code>await</code> 后面可以跟 Promise 对象，表示等待 Promise <code>resolve()</code> 才会继续向下执行，如果 Promise 被 <code>reject()</code> 或抛出异常则会被外面的 <code>try...catch</code> 捕获。</p>
+<p>Promise，generator/yield，await/async 都是现在和未来 JS 解决异步的标准做法，可以完美搭配使用。这也是使用标准 Promise 一大好处。</p>
+<h4 id="2-使用-fetch-的注意事项">2. 使用 Fetch 的注意事项</h4>
+<ul>
+<li>Fetch 请求默认是不带 cookie，需要设置 `fetch(url, {credentials: &lsquo;include&rsquo;})``</li>
+<li>服务器返回 400，500 错误码时并不会 reject，只有网络错误这些导致请求不能完成时，fetch 才会被 reject</li>
+</ul>
+<p>接下来将上面基于 XMLHttpRequest 的 AJAX 用 Fetch 改写：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">options</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>,
+    <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
+      <span style="color:#e6db74">&#39;Accept&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;application/json&#39;</span>,
+      <span style="color:#e6db74">&#39;Content-Type&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;application/json&#39;</span>
+    },
+    <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({ <span style="color:#a6e22e">username</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;admin&#39;</span>, <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;root&#39;</span> }),
+    <span style="color:#a6e22e">credentials</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;include&#39;</span>
+  };
+
+<span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api&#39;</span>, <span style="color:#a6e22e">options</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>())
+  .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">data</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>))
+  .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">error</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Oops, error: &#39;</span>, <span style="color:#a6e22e">error</span>))
+</code></pre></div>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+                <ul id="post-list" class="archive readmore">
+    <h3>阅读更多</h3>
+
+    
+    
+    
+        <li>
+            <a href="/blog/posts/php-curl-%E5%8F%91%E8%B5%B7get%E5%92%8Cpost%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/">Php Curl 发起get和post网络请求<aside class="dates">Feb 25 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/windows-phpstduy-nginx-504-gateway-timeout/">Windows Phpstduy Nginx 504 Gateway Timeout<aside class="dates">Feb 25 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/js%E5%9C%A8%E4%B8%8D%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E6%B7%BB%E5%8A%A0%E6%88%96%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0/">Js在不改变原数组的情况下，添加或删除指定元素<aside class="dates">Feb 23 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/js%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C-%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E5%92%8C%E4%B8%8D%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/">Js数组操作 改变原数组和不改变原数组的方法整理<aside class="dates">Feb 23 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/echart%E6%95%A3%E7%82%B9%E5%9B%BE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9B%BE%E6%A0%87/">Echart散点图自定义图标<aside class="dates">Feb 7 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/php-%E6%89%A7%E8%A1%8C%E8%B6%85%E6%97%B6/">Php 执行超时<aside class="dates">Feb 6 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/thinkphp-restful-api%E5%90%8C%E4%B8%80%E4%B8%AA%E5%AD%97%E6%AE%B5%E5%A4%9A%E4%B8%AA%E5%80%BC%E6%9F%A5%E8%AF%A2/">Thinkphp Restful API同一个字段多个值查询<aside class="dates">Feb 4 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/vue%E4%B8%AD%E4%BD%BFinput%E5%92%8Cel-input%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96%E7%84%A6%E7%82%B9%E7%9A%84%E5%A4%84%E7%90%86/">Vue中使input和el Input自动获取焦点的处理<aside class="dates">Jan 27 2021</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/element-ui%E7%BB%84%E4%BB%B6el-dialog%E5%AE%BD%E5%BA%A6%E7%9A%84%E4%BF%AE%E6%94%B9/">Element Ui组件el Dialog宽度的修改<aside class="dates">Dec 31 2020</aside></a>
+        </li>
+    
+        <li>
+            <a href="/blog/posts/vue%E4%B8%AD%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%AD%90%E7%BB%84%E4%BB%B6%E5%8F%82%E6%95%B0%E4%BF%AE%E6%94%B9%E7%9A%84%E5%8A%A8%E6%80%81%E7%9B%91%E5%90%AC/">Vue中父组件传子组件参数修改的动态监听<aside class="dates">Dec 30 2020</aside></a>
+        </li>
+    
+</ul>
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="https://github.com/yerkes">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2021 <i class="fa fa-heart" aria-hidden="true"></i> 余不二五
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://buera.top/blog/js/jquery-3.3.1.min.js"></script>
+<script src="http://buera.top/blog/js/main.js"></script>
+<script src="http://buera.top/blog/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

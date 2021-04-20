@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>composer on 余不二五</title>
+    <link>http://buera.top/blog/tags/composer/</link>
+    <description>Recent content in composer on 余不二五</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 21 Apr 2020 14:19:59 +0800</lastBuildDate><atom:link href="http://buera.top/blog/tags/composer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows下composer的安装与配置</title>
+      <link>http://buera.top/blog/posts/windows%E4%B8%8Bcomposer%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Tue, 21 Apr 2020 14:19:59 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/windows%E4%B8%8Bcomposer%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid>
+      <description>一、前提条件：
+1、下载php
+2、把php.exe所在文件路径添加到环境变量path中
+3、检查php是否配置成功
+按win+r，弹出框输入cmd，接着输入php -v，如果出现版本号则表示配置成功
+4、开启openssl扩展
+打开php.ini文件找到openssl把前面分号去掉即可；如果用的是wamp集成环境，右键在选项中开启即可
+ 二、composer安装
+方法一：(推荐)
+最简单省事的方法：点击Composer-Setup.exe下载，然后一步步next即可，注意安装过程中不要勾选代理
+方法二：(方法一安装过程中出现问题无法解决时用方法二)
+官网下载composer.phar，复制至php.exe相同路径下，接着创建两个文件composer和composer.bat
+composer内容为：
+#!/bin/sh  dir=$(cd &amp;#34;${0%[/\\]*}&amp;#34; &amp;gt; /dev/null; pwd) if [ -d /proc/cygdrive ]; then case $(which php) in $(readlink -n /proc/cygdrive)/*) # We are in Cygwin using Windows php, so the path must be translated  dir=$(cygpath -m &amp;#34;$dir&amp;#34;); ;; esac fi php &amp;#34;${dir}/composer.phar&amp;#34; &amp;#34;$@&amp;#34; composer.bat内容为：
+@echo OFF :: in case DelayedExpansion is on and a path contains !</description>
+    </item>
+    
+  </channel>
+</rss>

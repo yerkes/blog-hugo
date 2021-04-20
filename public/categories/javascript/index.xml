@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>javascript on 余不二五</title>
+    <link>http://buera.top/blog/categories/javascript/</link>
+    <description>Recent content in javascript on 余不二五</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 02 Aug 2020 14:19:41 +0800</lastBuildDate><atom:link href="http://buera.top/blog/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>找出一个数组中的最大值</title>
+      <link>http://buera.top/blog/posts/%E6%89%BE%E5%87%BA%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC/</link>
+      <pubDate>Sun, 02 Aug 2020 14:19:41 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/%E6%89%BE%E5%87%BA%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC/</guid>
+      <description>本文介绍 JavaScript 的几种从数组中找出最大值的方法。
+使用递归函数 var arr = [9,8,55,66,49,68,109,55,33,6,2,1]; var max = arr[0]; function findMax( i ){ if( i == arr.length ) return max; if( max &amp;lt; arr[i] ) max = arr[i]; findMax(i+1); } findMax(1); console.log(max); 使用 for 循环遍历 var arr = [9,8,55,66,49,68,109,55,33,6,2,1]; var max = arr[0]; for(var i = 1; i &amp;lt; arr.length; i++){ if( max &amp;lt; arr[i] ){ max = arr[i]; } } console.log(max); 使用apply将数组传入max方法中直接返回 Math.max.apply(null,[9,8,55,66,49,68,109,55,33,6,2,1]) 除此之外，还有很多数组排序方式，都可以在排序后，根据新数组索引值获取 最大/最小 值。</description>
+    </item>
+    
+    <item>
+      <title>ES6基础语法</title>
+      <link>http://buera.top/blog/posts/es6%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</link>
+      <pubDate>Tue, 14 Jul 2020 22:52:56 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/es6%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</guid>
+      <description>ES6 函数 1、this ：this代表当前正在执行的对象
+function fn () { console.log(this) } fn() // window const obj = new fn(); // { } fn.call({ name:&amp;#34;1&amp;#34; }) // { name:&amp;#39;1&amp;#39; } 2、箭头函数
+（1）箭头函数的this是在定义的时候就固定不变了
+（2）箭头函数 没有自己的this
+（3）箭头函数 不能当类(构造器)使用 不可以 new
+（4）箭头函数 没有 arguments
+const fn = () =&amp;gt; { console.log(this); console.log(arguments); } fn() // undefined 严格模式下 在非严格模式下是 window  const obj = new fn(); // undefined new 一个实例 执行 4 步
+（1）创建一个空对象
+（2） 执行构造器 Person 把this指向这个 {}</description>
+    </item>
+    
+    <item>
+      <title>Promise的介绍与理解</title>
+      <link>http://buera.top/blog/posts/promise%E7%9A%84%E4%BB%8B%E7%BB%8D%E4%B8%8E%E7%90%86%E8%A7%A3/</link>
+      <pubDate>Mon, 01 Jun 2020 22:48:44 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/promise%E7%9A%84%E4%BB%8B%E7%BB%8D%E4%B8%8E%E7%90%86%E8%A7%A3/</guid>
+      <description>promise是什么？ 1、主要用于异步计算
+2、可以将异步操作队列化，按照期望的顺序执行，返回符合预期的结果
+3、可以在对象之间传递和操作promise，帮助我们处理队列
+为什么会有promise？ 为了避免界面冻结（任务）
+ 同步：假设你去了一家饭店，找个位置，叫来服务员，这个时候服务员对你说，对不起我是“同步”服务员，我要服务完这张桌子才能招呼你。那桌客人明明已经吃上了，你只是想要个菜单，这么小的动作，服务员却要你等到别人的一个大动作完成之后，才能再来招呼你，这个便是同步的问题：也就是“顺序交付的工作1234，必须按照1234的顺序完成”。 异步：则是将耗时很长的A交付的工作交给系统之后，就去继续做B交付的工作，。等到系统完成了前面的工作之后，再通过回调或者事件，继续做A剩下的工作。 AB工作的完成顺序，和交付他们的时间顺序无关，所以叫“异步”。  异步操作的常见语法  事件监听  document.getElementById(&amp;#39;#start&amp;#39;).addEventListener(&amp;#39;click&amp;#39;, start, false); function start() { // 响应事件，进行相应的操作 } // jquery on 监听 $(&amp;#39;#start&amp;#39;).on(&amp;#39;click&amp;#39;, start) 回调  // 比较常见的有ajax $.ajax(&amp;#39;http://www.wyunfei.com/&amp;#39;, { success (res) { // 这里可以监听res返回的数据做回调逻辑的处理  } }) // 或者在页面加载完毕后回调 $(function() { // 页面结构加载完成，做回调逻辑处理 }) 有了nodeJS之后&amp;hellip;对异步的依赖进一步加剧了 大家都知道在nodeJS出来之前PHP、Java、python等后台语言已经很成熟了，nodejs要想能够有自己的一片天，那就得拿出点自己的绝活：
+无阻塞高并发，是nodeJS的招牌，要达到无阻塞高并发异步是其基本保障 举例：从数据库查询数据，PHP第一个任务查询数据，后面有了新任务，那么后面任务会被挂起排队；而nodeJS是第一个任务挂起交给数据库去跑，然后去接待第二个任务交给对应的系统组件去处理挂起，接着去接待第三个任务&amp;hellip;
+那这样子的处理必然要依赖于异步操作
+异步回调的问题：  之前处理异步是通过纯粹的回调函数的形式进行处理 很容易进入到回调地狱中，剥夺了函数return的能力 问题可以解决，但是难以读懂，维护困难 稍有不慎就会踏入回调地狱 - 嵌套层次深，不好维护  一般情况我们一次性调用API就可以完成请求。 有些情况需要多次调用服务器API，就会形成一个链式调用，比如为了完成一个功能，我们需要调用API1、API2、API3，依次按照顺序进行调用，这个时候就会出现回调地狱的问题
+promise  promise是一个对象，对象和函数的区别就是对象可以保存状态，函数不可以（闭包除外） 并未剥夺函数return的能力，因此无需层层传递callback，进行回调获取数据 代码风格，容易理解，便于维护 多个异步等待合并便于解决  promise详解 new Promise( function (resolve, reject) { // 一段耗时的异步操作  resolve(&amp;#39;成功&amp;#39;) // 数据处理完成  // reject(&amp;#39;失败&amp;#39;) // 数据处理出错  } ).</description>
+    </item>
+    
+    <item>
+      <title>Javascript中的slice、splice、split使用区别</title>
+      <link>http://buera.top/blog/posts/javascript%E4%B8%AD%E7%9A%84slicesplicesplit%E4%BD%BF%E7%94%A8%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Mon, 01 Jun 2020 19:39:44 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/javascript%E4%B8%AD%E7%9A%84slicesplicesplit%E4%BD%BF%E7%94%A8%E5%8C%BA%E5%88%AB/</guid>
+      <description>1、slice（数组）
+用法：array.slice(start,end)
+解释：该方法是对数组进行部分截取，并返回一个数组副本；参数start是截取的开始数组索引，end参数等于你要取的最后一个字符的位置值加上1（可选）
+//如果不传入参数二，那么将从参数一的索引位置开始截取，一直到数组尾 var a=[1,2,3,4,5,6]; var b=a.slice(0,3); //[1,2,3] var c=a.slice(3); //[4,5,6]  //如果两个参数中的任何一个是负数，array.length会和它们相加，试图让它们成为非负数，举例说明： //当只传入一个参数，且是负数时，length会与参数相加，然后再截取 var a=[1,2,3,4,5,6]; var b=a.slice(-1); //[6]  //当只传入一个参数，是负数时,并且参数的绝对值大于数组length时，会截取整个数组 var a=[1,2,3,4,5,6]; var b=a.slice(-6); //[1,2,3,4,5,6] var c=a.slice(-8); //[1,2,3,4,5,6]  //当传入两个参数一正一负时，length也会先于负数相加后，再截取 var a=[1,2,3,4,5,6]; var b=a.slice(2,-3); //[3]  //当传入一个参数，大于length时，将返回一个空数组 var a=[1,2,3,4,5,6]; var b=a.slice(6);　//[] 2、slice（字符串）
+用法：string.slice(start,end)
+解释：slice方法复制string的一部分来构造一个新的字符串，用法与参数匀和数组的slice方法一样;end参数等于你要取的最后一个字符的位置值加上1
+//举个简单的例子 var a=&amp;#34;i am a boy&amp;#34;; var b=a.slice(0,6); //&amp;#34;i am a&amp;#34; 3、splice（数组）
+用法：array.splice(start,deleteCount,item&amp;hellip;)
+解释：splice方法从array中移除一个或多个数组，并用新的item替换它们。参数start是从数组array中移除元素的开始位置。参数deleteCount是要移除的元素的个数。
+如果有额外的参数，那么item会插入到被移除元素的位置上。它返回一个包含被移除元素的数组。
+//举一个简单的例子 var a=[&amp;#39;a&amp;#39;,&amp;#39;b&amp;#39;,&amp;#39;c&amp;#39;]; var b=a.splice(1,1,&amp;#39;e&amp;#39;,&amp;#39;f&amp;#39;); //a=[&amp;#39;a&amp;#39;,&amp;#39;e&amp;#39;,&amp;#39;f&amp;#39;,&amp;#39;c&amp;#39;],b=[&amp;#39;b&amp;#39;] 4、split（字符串）
+用法：string.split(separator,limit)</description>
+    </item>
+    
+    <item>
+      <title>正则表达式的test()、exec()、compile()对象</title>
+      <link>http://buera.top/blog/posts/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84testexeccompile%E5%AF%B9%E8%B1%A1/</link>
+      <pubDate>Wed, 11 Mar 2020 15:24:33 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84testexeccompile%E5%AF%B9%E8%B1%A1/</guid>
+      <description>使用RegExp对象 在JavaScript中，RegExp对象是一个预定了属性和方法的正则表达式对象
+ test()
+ test()方法用于检测一个字符串是否匹配某个模式，如果字符串中含有匹配的文本，则返回true，否则返回false。
+var part = /e/; var res = part.test(&amp;#34;I love coding&amp;#34;); console.log(res);//返回true  exec()
+ exec()函数返回一个数组，其中存放匹配的结果。如果未找到匹配，则返回值为null。
+var part = /e/; var res = part.exec(&amp;#34;I love coding&amp;#34;); console.log(res);//返回e,下标为5的e  compile()
+  compile()方法用于改变RegExp。 compile()既可以改变检索模式，也可以添加或删除第二个参数  var part = new RegExp(&amp;#34;e&amp;#34;); document.write(part.test(&amp;#34;I love coding&amp;#34;));//输出true part.compile(&amp;#34;b&amp;#34;);//改变检索值 document.write(part.test(&amp;#34;I love coding&amp;#34;));//输出flase </description>
+    </item>
+    
+    <item>
+      <title>forEach()与map()的区别</title>
+      <link>http://buera.top/blog/posts/foreach%E4%B8%8Emap%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Fri, 07 Feb 2020 15:55:02 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/foreach%E4%B8%8Emap%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description> forEach()允许在回调函数中对原数组进行修改，map()需要定义的新的数组返回  let arr = [1, 2, 3, 4]; arr.forEach((value, key) =&amp;gt; { return arr[key] = value * value; }); console.log(arr); let list = arr.map(value =&amp;gt; { return value * value; }); console.log(list);  其它，forEach()可以做到的东西，map()也同样可以。反过来也是如此。  </description>
+    </item>
+    
+  </channel>
+</rss>

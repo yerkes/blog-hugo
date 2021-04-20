@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>学习笔记 on 余不二五</title>
+    <link>http://buera.top/blog/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+    <description>Recent content in 学习笔记 on 余不二五</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 25 Feb 2021 21:49:11 +0800</lastBuildDate><atom:link href="http://buera.top/blog/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Php Curl 发起get和post网络请求</title>
+      <link>http://buera.top/blog/posts/php-curl-%E5%8F%91%E8%B5%B7get%E5%92%8Cpost%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/</link>
+      <pubDate>Thu, 25 Feb 2021 21:49:11 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/php-curl-%E5%8F%91%E8%B5%B7get%E5%92%8Cpost%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/</guid>
+      <description>curl get请求 function curl_get($url){ $header = array( &amp;#39;Accept: application/json&amp;#39;, ); $curl = curl_init(); //设置抓取的url  curl_setopt($curl, CURLOPT_URL, $url); //设置头文件的信息作为数据流输出  curl_setopt($curl, CURLOPT_HEADER, 0); // 超时设置,以秒为单位  curl_setopt($curl, CURLOPT_TIMEOUT, 1); // 超时设置，以毫秒为单位  // curl_setopt($curl, CURLOPT_TIMEOUT_MS, 500);  // 设置请求头  curl_setopt($curl, CURLOPT_HTTPHEADER, $header); //设置获取的信息以文件流的形式返回，而不是直接输出。  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false); //执行命令  $data = curl_exec($curl); // 显示错误信息  if (curl_error($curl)) { print &amp;#34;Error: &amp;#34; . curl_error($curl); } else { // 打印返回的内容  var_dump($data); curl_close($curl); } } curl post请求 // $url 是请求的链接 // $postdata 是传输的数据，数组格式 function curl_post( $url, $postdata ) { $header = array( &amp;#39;Accept: application/json&amp;#39;, ); //初始化  $curl = curl_init(); //设置抓取的url  curl_setopt($curl, CURLOPT_URL, $url); //设置头文件的信息作为数据流输出  curl_setopt($curl, CURLOPT_HEADER, 0); //设置获取的信息以文件流的形式返回，而不是直接输出。  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); // 超时设置  curl_setopt($curl, CURLOPT_TIMEOUT, 10); // 超时设置，以毫秒为单位  // curl_setopt($curl, CURLOPT_TIMEOUT_MS, 500);  // 设置请求头  curl_setopt($curl, CURLOPT_HTTPHEADER, $header); curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE ); curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE ); //设置post方式提交  curl_setopt($curl, CURLOPT_POST, 1); curl_setopt($curl, CURLOPT_POSTFIELDS, $postdata); //执行命令  $data = curl_exec($curl); // 显示错误信息  if (curl_error($curl)) { print &amp;#34;Error: &amp;#34; .</description>
+    </item>
+    
+    <item>
+      <title>Windows Phpstduy Nginx 504 Gateway Timeout</title>
+      <link>http://buera.top/blog/posts/windows-phpstduy-nginx-504-gateway-timeout/</link>
+      <pubDate>Thu, 25 Feb 2021 15:32:07 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/windows-phpstduy-nginx-504-gateway-timeout/</guid>
+      <description>server { listen 80; server_name localhost; root &amp;quot;E:/phpstudy_pro/WWW&amp;quot;; location / { index index.php index.html; error_page 400 /error/400.html; error_page 403 /error/403.html; error_page 404 /error/404.html; error_page 500 /error/500.html; error_page 501 /error/501.html; error_page 502 /error/502.html; error_page 503 /error/503.html; error_page 504 /error/504.html; error_page 505 /error/505.html; error_page 506 /error/506.html; error_page 507 /error/507.html; error_page 509 /error/509.html; error_page 510 /error/510.html; autoindex off; } location ~ \.php(.*)$ { fastcgi_pass 127.0.0.1:9000; fastcgi_index index.php; fastcgi_split_path_info ^((?U).+\.php)(/?.+)$; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; fastcgi_param PATH_INFO $fastcgi_path_info; fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info; include fastcgi_params; #fastcgi连接超时时间，默认60秒 fastcgi_connect_timeout 3600; #nginx 进程向 fastcgi 进程发送请求过程的超时时间，默认值60秒 fastcgi_send_timeout 3600; # fastcgi 进程向 nginx 进程发送输出过程的超时时间，默认值60秒 fastcgi_read_timeout 3600; #nginx跟后端服务器连接超时时间(代理连接超时) proxy_connect_timeout 3800s; #后端服务器数据回传时间(代理发送超时) proxy_send_timeout 3600s; #连接成功后，后端服务器响应时间(代理接收超时) proxy_read_timeout 3600s; fastcgi_buffers 8 128k; fastcgi_buffer_size 128k; fastcgi_busy_buffers_size 256k; fastcgi_temp_file_write_size 256k; send_timeout 3600; } } </description>
+    </item>
+    
+    <item>
+      <title>Js在不改变原数组的情况下，添加或删除指定元素</title>
+      <link>http://buera.top/blog/posts/js%E5%9C%A8%E4%B8%8D%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E6%B7%BB%E5%8A%A0%E6%88%96%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0/</link>
+      <pubDate>Tue, 23 Feb 2021 15:30:32 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/js%E5%9C%A8%E4%B8%8D%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E6%B7%BB%E5%8A%A0%E6%88%96%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0/</guid>
+      <description>一、添加元素 var numList = [1, 2, 3, 4, 5, 6, 7, 8, 9] // 第一种方案 function add (newList, num) { return [...newList, num] } // 第二种方案 向后添加 function add (arr, num) { const newArr = [...arr] // copy arr to then new array  newArr.push(num) // Add num parameter to the end of the new array.  return newArr // Return the new array. } // 第二种方案 向前添加 function add (arr, num) { const newArr = [.</description>
+    </item>
+    
+    <item>
+      <title>Js数组操作 改变原数组和不改变原数组的方法整理</title>
+      <link>http://buera.top/blog/posts/js%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C-%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E5%92%8C%E4%B8%8D%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
+      <pubDate>Tue, 23 Feb 2021 11:30:04 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/js%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C-%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E5%92%8C%E4%B8%8D%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
+      <description>一、改变原始数组的方法： 1、pop()
+删除 arrayObject 的最后一个元素，把数组长度减 1，并且返回它删除的元素的值。如果数组已经为空，则 pop() 不 改变数组，并返回 undefined 值。arrayObject.pop() 。
+2、push()
+push() 方法可把它的参数顺序添加到 arrayObject 的尾部。它直接修改 arrayObject，而不是创建一个新的数组，arrayObject.push(newelement1,newelement2,….,newelementX) 。
+3、reverse()
+该方法会改变原来的数组&amp;mdash;-将原来的数组倒序，而不会创建新的数组。arrayObject.reverse()。
+4、shift()
+删除数组的第一个元素，并返回第一个元素的值,如果数组是空的，那么 shift() 方法将不进行任何操作。
+5、unshift()
+unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。arrayObject.unshift(newelement1,newelement2,….,newelementX)返回arrayObject 的新长度。
+6、sort()
+对数组的引用。请注意，数组在原数组上进行排序，不生成副本。arrayObject.sort(sortby) (如果调用该方法时没有使用参数，将按字母顺序对数组中的元素进行排序，说得更精确点，是按照字符编码的顺序进行排序。要实现这一点，首先应把数组的元素都转换成字符串（如有必要），以便进行比较。 如果想按照其他标准进行排序，就需要提供比较函数，该函数要比较两个值，然后返回一个用于说明这两个值的相对顺序的数字。比较函数应该具有两个参数 a 和 b，其返回值如下：
+若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值。 若 a 等于 b，则返回 0。 若 a 大于 b，则返回一个大于 0 的值。)
+7、splice()
+splice() 方法可删除从 index 处开始的零个或多个元素，并且用参数列表中声明的一个或多个值来替换那些被删除的元素。 如果从 arrayObject 中删除了元素，则返回的是含有被删除的元素的数组 arrayObject.splice(index,howmany,item1,…..,itemX) 。
+二、不改变原始数组的方法： 1、concat()
+用于连接两个或多个数组，仅会返回被连接数组的一个副本，arrayObject.concat(arrayX,arrayX,……,arrayX) 。</description>
+    </item>
+    
+    <item>
+      <title>Echart散点图自定义图标</title>
+      <link>http://buera.top/blog/posts/echart%E6%95%A3%E7%82%B9%E5%9B%BE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9B%BE%E6%A0%87/</link>
+      <pubDate>Sun, 07 Feb 2021 16:06:47 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/echart%E6%95%A3%E7%82%B9%E5%9B%BE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9B%BE%E6%A0%87/</guid>
+      <description>参数如下： option = { title: { text: &amp;#39;对数轴示例&amp;#39;, left: &amp;#39;center&amp;#39; }, tooltip: { trigger: &amp;#39;axis&amp;#39;, axisPointer: { type: &amp;#39;cross&amp;#39; }, formatter: &amp;#39;{a0}: {c0}&amp;lt;br /&amp;gt;{a1}: {c1}&amp;lt;br/&amp;gt;&amp;#39; }, legend: { left: &amp;#39;left&amp;#39;, data: [&amp;#39;2的指数&amp;#39;, &amp;#39;3的指数&amp;#39;] }, xAxis: { type: &amp;#39;category&amp;#39;, name: &amp;#39;x&amp;#39;, splitLine: {show: false}, data: [&amp;#39;一&amp;#39;, &amp;#39;二&amp;#39;, &amp;#39;三&amp;#39;, &amp;#39;四&amp;#39;, &amp;#39;五&amp;#39;, &amp;#39;六&amp;#39;, &amp;#39;七&amp;#39;, &amp;#39;八&amp;#39;, &amp;#39;九&amp;#39;] }, grid: { left: &amp;#39;3%&amp;#39;, right: &amp;#39;4%&amp;#39;, bottom: &amp;#39;3%&amp;#39;, containLabel: true }, yAxis: { type: &amp;#39;log&amp;#39;, name: &amp;#39;y&amp;#39;, minorTick: { show: true }, minorSplitLine: { show: true } }, series: [ { name: &amp;#39;3的指数&amp;#39;, type: &amp;#39;line&amp;#39;, data: [1, 3, 9, 27, 81, 247, 741, 2223, 6669] }, { tooltip:{ position: [10,10], formatter: &amp;#39;dfjkdjf&amp;#39; }, name: &amp;#39;2的指数&amp;#39;, type: &amp;#39;line&amp;#39;, data: [1, 2, 4, 8, 16, 32, 64, 128, 256] }, { tooltip:{ trigger: &amp;#39;item&amp;#39;, position: function (point, params, dom, rect, size) { // 固定在顶部  return [point[0], &amp;#39;90%&amp;#39;]; }, formatter: function(params) { return params.</description>
+    </item>
+    
+    <item>
+      <title>Php 执行超时</title>
+      <link>http://buera.top/blog/posts/php-%E6%89%A7%E8%A1%8C%E8%B6%85%E6%97%B6/</link>
+      <pubDate>Sat, 06 Feb 2021 15:18:48 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/php-%E6%89%A7%E8%A1%8C%E8%B6%85%E6%97%B6/</guid>
+      <description> Maximum execution time of 30 seconds exceeded
+ ; PHP执行时间无限制 max_execution_time = 0; </description>
+    </item>
+    
+    <item>
+      <title>Thinkphp Restful API同一个字段多个值查询</title>
+      <link>http://buera.top/blog/posts/thinkphp-restful-api%E5%90%8C%E4%B8%80%E4%B8%AA%E5%AD%97%E6%AE%B5%E5%A4%9A%E4%B8%AA%E5%80%BC%E6%9F%A5%E8%AF%A2/</link>
+      <pubDate>Thu, 04 Feb 2021 20:16:13 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/thinkphp-restful-api%E5%90%8C%E4%B8%80%E4%B8%AA%E5%AD%97%E6%AE%B5%E5%A4%9A%E4%B8%AA%E5%80%BC%E6%9F%A5%E8%AF%A2/</guid>
+      <description>$where[] = [&amp;#39;level&amp;#39;, &amp;#39;=&amp;#39;, 1]; $where[] = [&amp;#39;level&amp;#39;, &amp;#39;=&amp;#39;, 2]; $user = UserModel::whereOr($where)-&amp;gt;select(); where与whereOr混写（条件1 and (条件2 or 条件3)）  遇到whereOr和where组合链式操作使用闭包条件统一写到闭包里面 会自动加上括号. 改写链式查询条件为以下:
+ $where[] = [&amp;#39;level&amp;#39;, &amp;#39;=&amp;#39;, 1]; $where[] = [&amp;#39;level&amp;#39;, &amp;#39;=&amp;#39;, 2]; $user = UserModel::where(&amp;#39;条件1&amp;#39;)-&amp;gt;where(function ($query) use ($where) { $query-&amp;gt;where(&amp;#39;条件2&amp;#39;)-&amp;gt;whereOr($where) })-&amp;gt;select(); 查询时间范围 $rangeData[&amp;#39;sell_date&amp;#39;] = [&amp;#39;egt&amp;#39;=&amp;gt;$date_start_day,&amp;#39;elt&amp;#39;=&amp;gt;$date_end_day];  一个字段多个值查询
+ $where[] = [&amp;#39;level&amp;#39;, &amp;#39;=&amp;#39;, 1]; $where[] = [&amp;#39;level&amp;#39;, &amp;#39;=&amp;#39;, 2]; 或 $whereOr[] = [&amp;#39;shop_name&amp;#39;,&amp;#39;in&amp;#39;,$shops]; </description>
+    </item>
+    
+    <item>
+      <title>Vue中使input和el Input自动获取焦点的处理</title>
+      <link>http://buera.top/blog/posts/vue%E4%B8%AD%E4%BD%BFinput%E5%92%8Cel-input%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96%E7%84%A6%E7%82%B9%E7%9A%84%E5%A4%84%E7%90%86/</link>
+      <pubDate>Wed, 27 Jan 2021 18:00:15 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/vue%E4%B8%AD%E4%BD%BFinput%E5%92%8Cel-input%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96%E7%84%A6%E7%82%B9%E7%9A%84%E5%A4%84%E7%90%86/</guid>
+      <description>一、【普通的自定义指令操作】：先在入口文件注册一个全局自定义指令 // main.js Vue.directive(&amp;#39;focus&amp;#39;, { inserted (el, binding, vnode) { // 聚焦元素  el.focus() } }) 【普通的自定义指令使用】：v-&amp;quot;+指令名&amp;quot;
+// index.vue &amp;lt;input v-focus placeholder=&amp;#34;因为有v-focus,所以我聚焦了&amp;#34; /&amp;gt; 二、【的自定义指令操作】：先在入口文件注册一个全局自定义指令 // main.js Vue.directive(&amp;#39;fo&amp;#39;, { inserted (el, binding, vnode) { // 聚焦元素  el.querySelector(&amp;#39;input&amp;#39;).focus() } }) 【的自定义指令使用】：v-&amp;quot;+指令名&amp;quot;
+// index.vue &amp;lt;el-input v-fo placeholder=&amp;quot;因为有v-fo,所以我聚焦了&amp;quot;&amp;gt;&amp;lt;/el-input&amp;gt; </description>
+    </item>
+    
+    <item>
+      <title>Element Ui组件el Dialog宽度的修改</title>
+      <link>http://buera.top/blog/posts/element-ui%E7%BB%84%E4%BB%B6el-dialog%E5%AE%BD%E5%BA%A6%E7%9A%84%E4%BF%AE%E6%94%B9/</link>
+      <pubDate>Thu, 31 Dec 2020 11:01:59 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/element-ui%E7%BB%84%E4%BB%B6el-dialog%E5%AE%BD%E5%BA%A6%E7%9A%84%E4%BF%AE%E6%94%B9/</guid>
+      <description>在el-dialog里添加customClass自定义样式
+&amp;lt;el-dialog :title=&amp;quot;&amp;quot; customClass=&amp;quot;customDialogWidth&amp;quot; :visible.sync=&amp;quot;&amp;quot; &amp;gt;&amp;lt;/el-dialog&amp;gt; 然后在里写样式，记得把scope去掉，让外部读取到样式
+&amp;lt;style lang=&amp;#34;scss&amp;#34;&amp;gt; .customDialogWidth{ width: 74%; } &amp;lt;/style&amp;gt; </description>
+    </item>
+    
+    <item>
+      <title>Vue中父组件传子组件参数修改的动态监听</title>
+      <link>http://buera.top/blog/posts/vue%E4%B8%AD%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%AD%90%E7%BB%84%E4%BB%B6%E5%8F%82%E6%95%B0%E4%BF%AE%E6%94%B9%E7%9A%84%E5%8A%A8%E6%80%81%E7%9B%91%E5%90%AC/</link>
+      <pubDate>Wed, 30 Dec 2020 18:47:51 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/vue%E4%B8%AD%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%AD%90%E7%BB%84%E4%BB%B6%E5%8F%82%E6%95%B0%E4%BF%AE%E6%94%B9%E7%9A%84%E5%8A%A8%E6%80%81%E7%9B%91%E5%90%AC/</guid>
+      <description>使用watch监听
+prop:{ uersinfo:{ type:Object, default:()=&amp;gt;{return} } } watch:{ userinfo(newVal,oldVal){ console.log(newVal,oldVal) } } </description>
+    </item>
+    
+    <item>
+      <title>AJAX面试问题</title>
+      <link>http://buera.top/blog/posts/ajax%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Thu, 15 Oct 2020 19:57:16 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/ajax%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/</guid>
+      <description>下面列出了常见的AJAX面试问题和答案。
+1、什么是AJAX？ AJAX代表异步JavaScript和XML。它是一组用于异步显示数据的相关技术。换句话说，它在不重新加载网页的情况下发送和检索数据。
+2、AJAX有哪些优点？  快速回复 带宽利用率 在从服务器检索数据之前，不会阻止用户。 它允许我们只将重要数据发送到服务器。 它使应用程序具有交互性和更快速。  3、AJAX有哪些缺点？ ​	（1） 取决于JavaScript
+​	（2）安全问题
+​	（3）调试很困难
+4、原生js ajax请求有几个步骤？分别是什么 //创建 XMLHttpRequest 对象 var ajax = new XMLHttpRequest(); //规定请求的类型、URL 以及是否异步处理请求。 ajax.open(&amp;#39;GET&amp;#39;,url,true); //发送信息至服务器时内容编码类型 ajax.setRequestHeader(&amp;#34;Content-type&amp;#34;, &amp;#34;application/x-www-form-urlencoded&amp;#34;); //发送请求 ajax.send(null); //接受服务器响应数据 ajax.onreadystatechange = function () { if (obj.readyState == 4 &amp;amp;&amp;amp; (obj.status == 200 || obj.status == 304)) { } }; 5、ajax几种请求方式？他们的优缺点？ 常用的post,get,delete。不常用copy、head、link等等。
+区别：
+（1）post比get安全 (因为post参数在请求体中。get参数在url上面)
+（2）get传输速度比post快 根据传参决定的。(post通过请求体传参，后台通过数据流接收。速度稍微慢一些。而get通过url传参可以直接获取)
+（3）post传输文件大理论没有限制 get传输文件小大概7-8k ie4k左右
+（4）get获取数据 post上传数据(上传的数据比较多 而且上传数据都是重要数据。所以不论在安全性还是数据量级 post是最好的选择)</description>
+    </item>
+    
+    <item>
+      <title>七牛云内容审核API之PHP服务端请求代码</title>
+      <link>http://buera.top/blog/posts/%E4%B8%83%E7%89%9B%E4%BA%91%E5%86%85%E5%AE%B9%E5%AE%A1%E6%A0%B8api%E4%B9%8Bphp%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AF%B7%E6%B1%82%E4%BB%A3%E7%A0%81/</link>
+      <pubDate>Tue, 15 Sep 2020 17:23:55 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/%E4%B8%83%E7%89%9B%E4%BA%91%E5%86%85%E5%AE%B9%E5%AE%A1%E6%A0%B8api%E4%B9%8Bphp%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AF%B7%E6%B1%82%E4%BB%A3%E7%A0%81/</guid>
+      <description> 调用七牛云图片审核接口
+ &amp;lt;?php namespace app\api\controller; use \Qiniu\Auth; use Qiniu\Http\Client; class Test { public function index(){ // 用于签名的公钥和私钥  $accessKey = &amp;#34;&amp;#34;; $secretKey = &amp;#34;&amp;#34;; $auth = new Auth($accessKey, $secretKey); $uri = &amp;#39;https://i.loli.net/2020/09/28/VtIqovsR649Zmdh.jpg&amp;#39;; $url = &amp;#34;http://ai.qiniuapi.com/v3/image/censor&amp;#34;; $method = &amp;#34;POST&amp;#34;; $host = &amp;#34;ai.qiniuapi.com&amp;#34;; $body = &amp;#34;{ \&amp;#34;data\&amp;#34;: { \&amp;#34;uri\&amp;#34;: \&amp;#34;$uri\&amp;#34; } ,\&amp;#34;params\&amp;#34;: {\&amp;#34;scenes\&amp;#34;: [\&amp;#34;pulp\&amp;#34;,\&amp;#34;terror\&amp;#34;,\&amp;#34;politician\&amp;#34;]}}&amp;#34;; $contentType = &amp;#34;application/json&amp;#34;; $headers = $auth-&amp;gt;authorizationV2($url, $method, $body, $contentType); $headers[&amp;#39;Content-Type&amp;#39;] = $contentType; $headers[&amp;#39;Host&amp;#39;] = $host; $response = Client::post($url, $body, $headers); if ($response-&amp;gt;ok()) { $r = $response-&amp;gt;json(); return json($r); } } } </description>
+    </item>
+    
+    <item>
+      <title>分别使用XHR、jQuery和Fetch实现AJAX</title>
+      <link>http://buera.top/blog/posts/%E5%88%86%E5%88%AB%E4%BD%BF%E7%94%A8xhrjquery%E5%92%8Cfetch%E5%AE%9E%E7%8E%B0ajax/</link>
+      <pubDate>Sun, 09 Aug 2020 16:50:52 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/%E5%88%86%E5%88%AB%E4%BD%BF%E7%94%A8xhrjquery%E5%92%8Cfetch%E5%AE%9E%E7%8E%B0ajax/</guid>
+      <description>本文详细讲述如何使用原生 JS、jQuery 和 Fetch 来实现 AJAX。
+AJAX 即 Asynchronous JavaScript and XML，异步的 JavaScript 和 XML。使用 AJAX 可以无刷新地向服务端发送请求接收服务端响应，并更新页面。
+一、原生 JS 实现 AJAX JS 实现 AJAX 主要基于浏览器提供的 XMLHttpRequest（XHR）类，所有现代浏览器（IE7+、Firefox、Chrome、Safari 以及 Opera）均内建 XMLHttpRequest 对象。
+1. 获取XMLHttpRequest对象 // 获取XMLHttpRequest对象 var xhr = new XMLHttpRequest(); 如果需要兼容老版本的 IE (IE5, IE6) 浏览器，则可以使用 ActiveX 对象：
+var xhr; if (window.XMLHttpRequest) { // Mozilla, Safari...  xhr = new XMLHttpRequest(); } else if (window.ActiveXObject) { // IE  try { xhr = new ActiveXObject(&amp;#39;Msxml2.</description>
+    </item>
+    
+    <item>
+      <title>Windows下composer的安装与配置</title>
+      <link>http://buera.top/blog/posts/windows%E4%B8%8Bcomposer%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Tue, 21 Apr 2020 14:19:59 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/windows%E4%B8%8Bcomposer%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid>
+      <description>一、前提条件：
+1、下载php
+2、把php.exe所在文件路径添加到环境变量path中
+3、检查php是否配置成功
+按win+r，弹出框输入cmd，接着输入php -v，如果出现版本号则表示配置成功
+4、开启openssl扩展
+打开php.ini文件找到openssl把前面分号去掉即可；如果用的是wamp集成环境，右键在选项中开启即可
+ 二、composer安装
+方法一：(推荐)
+最简单省事的方法：点击Composer-Setup.exe下载，然后一步步next即可，注意安装过程中不要勾选代理
+方法二：(方法一安装过程中出现问题无法解决时用方法二)
+官网下载composer.phar，复制至php.exe相同路径下，接着创建两个文件composer和composer.bat
+composer内容为：
+#!/bin/sh  dir=$(cd &amp;#34;${0%[/\\]*}&amp;#34; &amp;gt; /dev/null; pwd) if [ -d /proc/cygdrive ]; then case $(which php) in $(readlink -n /proc/cygdrive)/*) # We are in Cygwin using Windows php, so the path must be translated  dir=$(cygpath -m &amp;#34;$dir&amp;#34;); ;; esac fi php &amp;#34;${dir}/composer.phar&amp;#34; &amp;#34;$@&amp;#34; composer.bat内容为：
+@echo OFF :: in case DelayedExpansion is on and a path contains !</description>
+    </item>
+    
+    <item>
+      <title>正则表达式的test()、exec()、compile()对象</title>
+      <link>http://buera.top/blog/posts/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84testexeccompile%E5%AF%B9%E8%B1%A1/</link>
+      <pubDate>Wed, 11 Mar 2020 15:24:33 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84testexeccompile%E5%AF%B9%E8%B1%A1/</guid>
+      <description>使用RegExp对象 在JavaScript中，RegExp对象是一个预定了属性和方法的正则表达式对象
+ test()
+ test()方法用于检测一个字符串是否匹配某个模式，如果字符串中含有匹配的文本，则返回true，否则返回false。
+var part = /e/; var res = part.test(&amp;#34;I love coding&amp;#34;); console.log(res);//返回true  exec()
+ exec()函数返回一个数组，其中存放匹配的结果。如果未找到匹配，则返回值为null。
+var part = /e/; var res = part.exec(&amp;#34;I love coding&amp;#34;); console.log(res);//返回e,下标为5的e  compile()
+  compile()方法用于改变RegExp。 compile()既可以改变检索模式，也可以添加或删除第二个参数  var part = new RegExp(&amp;#34;e&amp;#34;); document.write(part.test(&amp;#34;I love coding&amp;#34;));//输出true part.compile(&amp;#34;b&amp;#34;);//改变检索值 document.write(part.test(&amp;#34;I love coding&amp;#34;));//输出flase </description>
+    </item>
+    
+    <item>
+      <title>forEach()与map()的区别</title>
+      <link>http://buera.top/blog/posts/foreach%E4%B8%8Emap%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Fri, 07 Feb 2020 15:55:02 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/foreach%E4%B8%8Emap%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description> forEach()允许在回调函数中对原数组进行修改，map()需要定义的新的数组返回  let arr = [1, 2, 3, 4]; arr.forEach((value, key) =&amp;gt; { return arr[key] = value * value; }); console.log(arr); let list = arr.map(value =&amp;gt; { return value * value; }); console.log(list);  其它，forEach()可以做到的东西，map()也同样可以。反过来也是如此。  </description>
+    </item>
+    
+  </channel>
+</rss>

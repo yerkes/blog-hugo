@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>js on 余不二五</title>
+    <link>http://buera.top/blog/tags/js/</link>
+    <description>Recent content in js on 余不二五</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 23 Feb 2021 15:30:32 +0800</lastBuildDate><atom:link href="http://buera.top/blog/tags/js/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Js在不改变原数组的情况下，添加或删除指定元素</title>
+      <link>http://buera.top/blog/posts/js%E5%9C%A8%E4%B8%8D%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E6%B7%BB%E5%8A%A0%E6%88%96%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0/</link>
+      <pubDate>Tue, 23 Feb 2021 15:30:32 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/js%E5%9C%A8%E4%B8%8D%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E6%B7%BB%E5%8A%A0%E6%88%96%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0/</guid>
+      <description>一、添加元素 var numList = [1, 2, 3, 4, 5, 6, 7, 8, 9] // 第一种方案 function add (newList, num) { return [...newList, num] } // 第二种方案 向后添加 function add (arr, num) { const newArr = [...arr] // copy arr to then new array  newArr.push(num) // Add num parameter to the end of the new array.  return newArr // Return the new array. } // 第二种方案 向前添加 function add (arr, num) { const newArr = [.</description>
+    </item>
+    
+    <item>
+      <title>Js数组操作 改变原数组和不改变原数组的方法整理</title>
+      <link>http://buera.top/blog/posts/js%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C-%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E5%92%8C%E4%B8%8D%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
+      <pubDate>Tue, 23 Feb 2021 11:30:04 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/js%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C-%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E5%92%8C%E4%B8%8D%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
+      <description>一、改变原始数组的方法： 1、pop()
+删除 arrayObject 的最后一个元素，把数组长度减 1，并且返回它删除的元素的值。如果数组已经为空，则 pop() 不 改变数组，并返回 undefined 值。arrayObject.pop() 。
+2、push()
+push() 方法可把它的参数顺序添加到 arrayObject 的尾部。它直接修改 arrayObject，而不是创建一个新的数组，arrayObject.push(newelement1,newelement2,….,newelementX) 。
+3、reverse()
+该方法会改变原来的数组&amp;mdash;-将原来的数组倒序，而不会创建新的数组。arrayObject.reverse()。
+4、shift()
+删除数组的第一个元素，并返回第一个元素的值,如果数组是空的，那么 shift() 方法将不进行任何操作。
+5、unshift()
+unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。arrayObject.unshift(newelement1,newelement2,….,newelementX)返回arrayObject 的新长度。
+6、sort()
+对数组的引用。请注意，数组在原数组上进行排序，不生成副本。arrayObject.sort(sortby) (如果调用该方法时没有使用参数，将按字母顺序对数组中的元素进行排序，说得更精确点，是按照字符编码的顺序进行排序。要实现这一点，首先应把数组的元素都转换成字符串（如有必要），以便进行比较。 如果想按照其他标准进行排序，就需要提供比较函数，该函数要比较两个值，然后返回一个用于说明这两个值的相对顺序的数字。比较函数应该具有两个参数 a 和 b，其返回值如下：
+若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值。 若 a 等于 b，则返回 0。 若 a 大于 b，则返回一个大于 0 的值。)
+7、splice()
+splice() 方法可删除从 index 处开始的零个或多个元素，并且用参数列表中声明的一个或多个值来替换那些被删除的元素。 如果从 arrayObject 中删除了元素，则返回的是含有被删除的元素的数组 arrayObject.splice(index,howmany,item1,…..,itemX) 。
+二、不改变原始数组的方法： 1、concat()
+用于连接两个或多个数组，仅会返回被连接数组的一个副本，arrayObject.concat(arrayX,arrayX,……,arrayX) 。</description>
+    </item>
+    
+    <item>
+      <title>找出一个数组中的最大值</title>
+      <link>http://buera.top/blog/posts/%E6%89%BE%E5%87%BA%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC/</link>
+      <pubDate>Sun, 02 Aug 2020 14:19:41 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/%E6%89%BE%E5%87%BA%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC/</guid>
+      <description>本文介绍 JavaScript 的几种从数组中找出最大值的方法。
+使用递归函数 var arr = [9,8,55,66,49,68,109,55,33,6,2,1]; var max = arr[0]; function findMax( i ){ if( i == arr.length ) return max; if( max &amp;lt; arr[i] ) max = arr[i]; findMax(i+1); } findMax(1); console.log(max); 使用 for 循环遍历 var arr = [9,8,55,66,49,68,109,55,33,6,2,1]; var max = arr[0]; for(var i = 1; i &amp;lt; arr.length; i++){ if( max &amp;lt; arr[i] ){ max = arr[i]; } } console.log(max); 使用apply将数组传入max方法中直接返回 Math.max.apply(null,[9,8,55,66,49,68,109,55,33,6,2,1]) 除此之外，还有很多数组排序方式，都可以在排序后，根据新数组索引值获取 最大/最小 值。</description>
+    </item>
+    
+    <item>
+      <title>forEach()与map()的区别</title>
+      <link>http://buera.top/blog/posts/foreach%E4%B8%8Emap%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Fri, 07 Feb 2020 15:55:02 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/foreach%E4%B8%8Emap%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description> forEach()允许在回调函数中对原数组进行修改，map()需要定义的新的数组返回  let arr = [1, 2, 3, 4]; arr.forEach((value, key) =&amp;gt; { return arr[key] = value * value; }); console.log(arr); let list = arr.map(value =&amp;gt; { return value * value; }); console.log(list);  其它，forEach()可以做到的东西，map()也同样可以。反过来也是如此。  </description>
+    </item>
+    
+  </channel>
+</rss>

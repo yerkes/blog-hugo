@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jsp on 余不二五</title>
+    <link>http://buera.top/blog/tags/jsp/</link>
+    <description>Recent content in jsp on 余不二五</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 17 May 2020 16:32:16 +0800</lastBuildDate><atom:link href="http://buera.top/blog/tags/jsp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux Nginx下运行jsp，jdk、tomcat配置</title>
+      <link>http://buera.top/blog/posts/linux-nginx%E4%B8%8B%E8%BF%90%E8%A1%8Cjspjdktomcat%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sun, 17 May 2020 16:32:16 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/linux-nginx%E4%B8%8B%E8%BF%90%E8%A1%8Cjspjdktomcat%E9%85%8D%E7%BD%AE/</guid>
+      <description>一、前提条件
+ 使用Xshell、Xftp 安装好JDK、Tomcat  二、配置环境
+vim /etc/profile
+输入以下内容：
+JAVA_HOME=/usr/local/java/jdk-14.0.1 CLASSPATH=$JAVA_HOME/lib/ PATH=$PATH:$JAVA_HOME/bin export PATH JAVA_HOME CLASSPATH CATALINA_BASE=/usr/local/tomcat CATALINA_HOME=/usr/local/tomcat export CLASSPATH=.:${CATALINA_HOME}/bin/tomcat-juli.jar:${CATALINA_HOME}/bin/bootstrap.jar export CATALINA_BASE CATALINA_HOME 进入/usr/local/tomcat/bin，输入./startup.sh启动tomcat
+然后，ip:8080访问即可</description>
+    </item>
+    
+  </channel>
+</rss>

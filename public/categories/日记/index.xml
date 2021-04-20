@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>日记 on 余不二五</title>
+    <link>http://buera.top/blog/categories/%E6%97%A5%E8%AE%B0/</link>
+    <description>Recent content in 日记 on 余不二五</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 02 Nov 2020 18:01:24 +0800</lastBuildDate><atom:link href="http://buera.top/blog/categories/%E6%97%A5%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>以微信群、QQ群作为校园通知群的现状及优化解决方案</title>
+      <link>http://buera.top/blog/posts/%E4%BB%A5%E5%BE%AE%E4%BF%A1%E7%BE%A4qq%E7%BE%A4%E4%BD%9C%E4%B8%BA%E6%A0%A1%E5%9B%AD%E9%80%9A%E7%9F%A5%E7%BE%A4%E7%9A%84%E7%8E%B0%E7%8A%B6%E5%8F%8A%E4%BC%98%E5%8C%96%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Mon, 02 Nov 2020 18:01:24 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/%E4%BB%A5%E5%BE%AE%E4%BF%A1%E7%BE%A4qq%E7%BE%A4%E4%BD%9C%E4%B8%BA%E6%A0%A1%E5%9B%AD%E9%80%9A%E7%9F%A5%E7%BE%A4%E7%9A%84%E7%8E%B0%E7%8A%B6%E5%8F%8A%E4%BC%98%E5%8C%96%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <description>高校各类通知群作为大学生重要的消息来源载体，伴随学生整个大学生涯。但，目前以QQ群作为主要载体，消息轰炸、通知缺乏标志性、通知内容文本过长、不易查找消息等弊端让学生望群生畏。以下简要分析：
+ 学校学生各大通知群现状
+  通知群多： 学生整个大学期间，通知群数量50+ 通知消息内容臃肿： 通知群消息内容排版密集，长文本让人撩花眼乱 通知分类不明显： 通知消息没有一个显著的分类标语，一些紧急通知没有达到紧急效果 通知历史记录容易丢失： 历史通知记录一旦丢失，无法恢复 通知群容易造成刷屏： 一些回复“收到”的消息，让学生产生烦腻 通知多级传达浪费人力劳动： 目前通知大多以复制粘贴的转发，通知冗余 缺乏二次提醒功能： 学生没来及查看或遗漏的的通知容易被忽略 缺乏统计通知浏览次数功能： 发布通知者无法获知通知查看人数，不知通知传达效果 缺乏筛选通知功能： 在满屏的消息列表中，查找消息让人头痛且浪费时间 缺乏学生身份鉴别功能： 一些校外人容易混进群里，窃取信息及发布非法广告   校园通知宝应用优势及特点
+  重要性、简洁性、时效性、纯碎性、安全性、持久性、广播性 通知形式：标题+标签+详情 通知分类：普通通知、重要通知、紧急通知 统一通知入口，权限分管 身份鉴别，校内师生使用 通知云存储取代本地存储 通知精准快速查找 通知置顶设置 记录学生任务通知完成状态 通知内容整合：文字+图片+文档+链接 通知编辑器：支持富文本+Markdown格式 文件资料分享 在线文档查看与编辑 课表创建，上课提醒   拓展功能
+  课程班级创建： 在线练习、作业发布提交 在线考勤系统： 签到码考勤+定位考勤 接入教务系统： 查成绩、查课表、选课、评教  </description>
+    </item>
+    
+  </channel>
+</rss>

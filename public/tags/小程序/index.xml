@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>小程序 on 余不二五</title>
+    <link>http://buera.top/blog/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/</link>
+    <description>Recent content in 小程序 on 余不二五</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 20 May 2020 17:26:00 +0800</lastBuildDate><atom:link href="http://buera.top/blog/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>小程序云开发·数据库</title>
+      <link>http://buera.top/blog/posts/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Wed, 20 May 2020 17:26:00 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>初始化
+ const db = wx.cloud.database() const testDB = wx.cloud.database({ env: &amp;#39;test&amp;#39; })  操作集合（表）
+ const todos = db.collection(&amp;#39;todos&amp;#39;)  索引操作（获取一个记录的数据）
+ const todo = db.collection(&amp;#39;todos&amp;#39;).doc(&amp;#39;todo-identifiant-aleatoire&amp;#39;)  插入
+ db.collection(&amp;#39;todos&amp;#39;).add({ // data 字段表示需新增的 JSON 数据  data: { // _id: &amp;#39;todo-identifiant-aleatoire&amp;#39;, // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了  description: &amp;#34;learn cloud database&amp;#34;, due: new Date(&amp;#34;2018-09-01&amp;#34;), tags: [ &amp;#34;cloud&amp;#34;, &amp;#34;database&amp;#34; ], // 为待办事项添加一个地理位置（113°E，23°N）  location: new db.Geo.Point(113, 23), done: false }, success: function(res) { // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id  console.</description>
+    </item>
+    
+  </channel>
+</rss>

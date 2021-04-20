@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ES6 on 余不二五</title>
+    <link>http://buera.top/blog/tags/es6/</link>
+    <description>Recent content in ES6 on 余不二五</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 14 Jul 2020 22:52:56 +0800</lastBuildDate><atom:link href="http://buera.top/blog/tags/es6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ES6基础语法</title>
+      <link>http://buera.top/blog/posts/es6%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</link>
+      <pubDate>Tue, 14 Jul 2020 22:52:56 +0800</pubDate>
+      
+      <guid>http://buera.top/blog/posts/es6%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</guid>
+      <description>ES6 函数 1、this ：this代表当前正在执行的对象
+function fn () { console.log(this) } fn() // window const obj = new fn(); // { } fn.call({ name:&amp;#34;1&amp;#34; }) // { name:&amp;#39;1&amp;#39; } 2、箭头函数
+（1）箭头函数的this是在定义的时候就固定不变了
+（2）箭头函数 没有自己的this
+（3）箭头函数 不能当类(构造器)使用 不可以 new
+（4）箭头函数 没有 arguments
+const fn = () =&amp;gt; { console.log(this); console.log(arguments); } fn() // undefined 严格模式下 在非严格模式下是 window  const obj = new fn(); // undefined new 一个实例 执行 4 步
+（1）创建一个空对象
+（2） 执行构造器 Person 把this指向这个 {}</description>
+    </item>
+    
+  </channel>
+</rss>
